@@ -40,7 +40,8 @@ export default function LifeFindingsPage() {
           title: edge?.node?.title || '',
           category: edge?.node?.category || '',
           date: edge?.node?.date || '',
-          body: edge?.node?.body
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          body: edge?.node?.body as any  // Type assertion for TinaMarkdown compatibility
         })).filter(f => f.id) || []
         
         setFindings(findingsData)
@@ -107,10 +108,23 @@ export default function LifeFindingsPage() {
                       
                       <div className="bg-white/5 p-4 rounded-lg border border-white/10">
                         <div className="text-white/70 text-sm leading-relaxed mb-2">
+                          // Add at the top of the file
+                          interface FindingBody {
+                            type: string;
+                            children: any[];
+                          }
+                          
+                          // Type guard function
+                          const renderMarkdownContent = (body: unknown) => {
+                            if (body && typeof body === 'object') {
+                              return <TinaMarkdown content={body as FindingBody} />;
+                            }
+                            return null;
+                          };
+                          
+                          // Usage in JSX
                           <div className="prose prose-invert prose-sm max-w-none prose-headings:text-white prose-headings:font-bold prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-p:mb-4 prose-p:leading-relaxed line-clamp-3">
-                            {finding.body && (
-                              <TinaMarkdown content={finding.body} />
-                            )}
+                            {renderMarkdownContent(finding.body)}
                           </div>
                         </div>
                         <div className="text-white/40 text-xs">

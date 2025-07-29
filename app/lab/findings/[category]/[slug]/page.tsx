@@ -147,7 +147,7 @@ export default function FindingDetailPage() {
             <GlassPanel className="p-8">
               <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-headings:font-bold prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-p:mb-6 prose-p:leading-relaxed prose-p:text-white/80 prose-strong:text-white prose-em:text-white/80 prose-li:text-white/80 prose-ul:text-white/80 prose-ol:text-white/80 prose-blockquote:text-white/80 prose-code:text-white prose-pre:text-white/80 text-white/80">
                 {finding.body && (
-                  <TinaMarkdown content={finding.body} />
+                  <TinaMarkdown content={finding.body as any} />
                 )}
               </div>
             </GlassPanel>

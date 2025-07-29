@@ -121,6 +121,8 @@ export function FindingsPanel() {
           </div>
         </Link>
       </div>
+      {/* If TinaMarkdown is used here, apply same fix */}
+      <TinaMarkdown content={finding.body as any} />
     </GlassPanel>
   )
 }
