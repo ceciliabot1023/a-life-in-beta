@@ -1,0 +1,49 @@
+{
+  "name": "a-life-in-beta",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev:tina": "tinacms dev -c \"next dev\"",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "tina:dev": "tinacms dev",
+    "tina:build": "tinacms build",
+    "tina:audit": "tinacms audit",
+    "content:backup": "git add content/ && git commit -m \"Content backup: $(date)\"",
+    "content:restore": "git checkout HEAD -- content/",
+    "content:deploy": "git push origin main",
+    "archive:current": "tsx scripts/archive-week.ts",
+    "archive:week": "tsx scripts/archive-week.ts",
+    "archive:setup": "npm install node-cron tsx"
+  },
+  "dependencies": {
+    "@tinacms/cli": "^1.6.9",
+    "framer-motion": "^10.18.0",
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^0.263.1",
+    "next": "^14.2.30",
+    "node-cron": "^3.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.17",
+    "tinacms": "^2.8.1",
+    "tsx": "^4.20.3"
+  },
+  "devDependencies": {
+    "@types/node": "24.0.15",
+    "@types/node-cron": "^3.0.11",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.0.0",
+    "typescript": "5.8.3"
+  },
+  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
+  "main": "next.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,1121 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Core Colors from MVP */
+  --void-bg: #0a0c14;           /* Deep lab shadows */
+  --neon-red: #ff4d4d;          /* Primary accent - glowing flask */
+  --neon-cyan: #61dafb;         /* Secondary accent - cool rim lighting */
+  --text-primary: #e0e0e0;      /* Soft off-white for readability */
+  --glass-bg: rgba(16, 18, 27, 0.7); /* Semi-transparent panel base */
+  
+  /* Supporting Colors */
+  --glass-border: rgba(97, 218, 251, 0.3); /* Subtle cyan glow */
+  --glass-shadow: rgba(0, 0, 0, 0.5);      /* Depth shadows */
+  --text-secondary: #a8b2d1;               /* Muted text */
+  --success-glow: #4ade80;                 /* Positive metrics */
+  --warning-glow: #fbbf24;                 /* Attention states */
+}
+
+@layer utilities {
+  .text-shadow-lg {
+    text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+  }
+  
+  .glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite alternate;
+  }
+  
+  .particle-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .particle-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, var(--neon-cyan), transparent),
+      radial-gradient(2px 2px at 40px 70px, var(--neon-red), transparent),
+      radial-gradient(1px 1px at 90px 40px, var(--success-glow), transparent),
+      radial-gradient(1px 1px at 130px 80px, var(--warning-glow), transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: particle-float 20s linear infinite;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
+
+@keyframes glow-pulse {
+  from {
+    box-shadow: 0 0 20px var(--neon-cyan);
+  }
+  to {
+    box-shadow: 0 0 30px var(--neon-cyan), 0 0 40px var(--neon-cyan);
+  }
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  33% {
+    transform: translateY(-10px) translateX(10px);
+  }
+  66% {
+    transform: translateY(5px) translateX(-5px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px var(--glass-shadow);
+  transition: all 0.3s ease;
+}
+
+.glass-panel:hover {
+  border-color: rgba(97, 218, 251, 0.5);
+  box-shadow: 0 8px 32px var(--glass-shadow), 0 0 20px rgba(97, 218, 251, 0.1);
+}
+
+.glass-effect {
+  background: linear-gradient(135deg, 
+    var(--glass-bg) 0%, 
+    rgba(16, 18, 27, 0.4) 50%, 
+    var(--glass-bg) 100%);
+  backdrop-filter: blur(12px) saturate(1.3);
+  border: 1px solid var(--glass-border);
+}
+
+.metric-card {
+  background: rgba(16, 18, 27, 0.5);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  padding: 1.25rem 1rem 1rem 1.5rem; /* Added padding with more space on the left */
+  border-radius: 12px; /* Added border radius for better appearance */
+}
+
+.metric-card:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 8px 32px rgba(97, 218, 251, 0.2);
+  transform: translateY(-2px);
+}
+
+.cta-button {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-red));
+  border: none;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(97, 218, 251, 0.3);
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.cta-button:hover::before {
+  left: 100%;
+}
+
+.jigsaw-panel {
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.jigsaw-panel:hover {
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .glass-panel {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  .particle-bg::before {
+    background-size: 100px 50px;
+  }
+}
+
+
+
+.glass-panel-enhanced {
+  background: linear-gradient(135deg, 
+    rgba(16, 18, 27, 0.4) 0%,
+    rgba(16, 18, 27, 0.6) 50%,
+    rgba(16, 18, 27, 0.3) 100%);
+  backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(97, 218, 251, 0.2);
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-panel-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(97, 218, 251, 0.05) 0%,
+    transparent 50%,
+    rgba(255, 77, 77, 0.03) 100%);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.glass-panel-enhanced:hover {
+  border-color: rgba(97, 218, 251, 0.4);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(97, 218, 251, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.glass-button:hover::before {
+  left: 100%;
+}
+
+/* Utility classes for color scheme */
+.text-neon-cyan {
+  color: var(--neon-cyan);
+}
+
+.text-neon-red {
+  color: var(--neon-red);
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 640px) {
+  .glass-panel-enhanced {
+    margin: 1rem;
+    border-radius: 16px;
+  }
+  
+  .glass-panel-enhanced::before {
+    border-radius: 16px;
+  }
+  
+  .cyberpunk-title {
+    letter-spacing: 0.02em;
+  }
+  
+  .cyberpunk-title-glow {
+    letter-spacing: 0.02em;
+  }
+}
+
+/* Cyberpunk handwriting title - base style without glow */
+.cyberpunk-title {
+  font-family: 'Orbitron', 'Share Tech Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* Glowing effect only for top bar headings */
+.cyberpunk-title-glow {
+  font-family: 'Orbitron', 'Share Tech Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-shadow: 
+    0 0 5px rgba(224, 224, 224, 0.5),
+    0 0 10px rgba(224, 224, 224, 0.3),
+    0 0 15px rgba(224, 224, 224, 0.2);
+}
+
+/* Refined cyber glow for Beta text */
+.cyber-glow {
+  position: relative;
+  display: inline-block;
+  animation: cyber-pulse 3s ease-in-out infinite;
+}
+
+.cyber-glow::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--neon-cyan);
+  filter: blur(2px);
+  opacity: 0.7;
+  z-index: -1;
+}
+
+@keyframes cyber-pulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px var(--neon-cyan),
+      0 0 10px var(--neon-cyan),
+      0 0 15px var(--neon-cyan);
+    opacity: 1;
+  }
+  50% {
+    text-shadow: 
+      0 0 8px var(--neon-cyan),
+      0 0 15px var(--neon-cyan),
+      0 0 25px var(--neon-cyan),
+      0 0 35px var(--neon-cyan);
+    opacity: 0.9;
+  }
+}
+
+/* Primary cyber button matching color scheme */
+.cyber-button-primary {
+  background: linear-gradient(135deg, 
+    var(--neon-red) 0%,
+    #cc3333 50%,
+    var(--neon-red) 100%);
+  border: 1px solid var(--neon-red);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 0 10px rgba(255, 77, 77, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.cyber-button-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent);
+  transition: left 0.5s;
+}
+
+.cyber-button-primary:hover {
+  background: linear-gradient(135deg, 
+    #ff6666 0%,
+    var(--neon-cyan) 50%,
+    #ff6666 100%);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(255, 77, 77, 0.4),
+    0 0 20px rgba(255, 77, 77, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: #ff6666;
+}
+
+.cyber-button-primary:hover::before {
+  left: 100%;
+}
+
+.cyber-button-primary:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 4px 15px rgba(255, 77, 77, 0.3),
+    0 0 15px rgba(255, 77, 77, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced glass panel */
+.glass-panel-enhanced {
+  background: linear-gradient(135deg, 
+    rgba(16, 18, 27, 0.4) 0%,
+    rgba(16, 18, 27, 0.6) 50%,
+    rgba(16, 18, 27, 0.3) 100%);
+  backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(97, 218, 251, 0.2);
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-panel-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(97, 218, 251, 0.05) 0%,
+    transparent 50%,
+    rgba(255, 77, 77, 0.03) 100%);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.glass-panel-enhanced:hover {
+  border-color: rgba(97, 218, 251, 0.4);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(97, 218, 251, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.glass-button:hover::before {
+  left: 100%;
+}
+
+/* Utility classes for color scheme */
+.text-neon-cyan {
+  color: var(--neon-cyan);
+}
+
+.text-neon-red {
+  color: var(--neon-red);
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 640px) {
+  .glass-panel-enhanced {
+    margin: 1rem;
+    border-radius: 16px;
+  }
+  
+  .glass-panel-enhanced::before {
+    border-radius: 16px;
+  }
+  
+  .cyberpunk-title {
+    letter-spacing: 0.02em;
+  }
+  
+  .cyberpunk-title-glow {
+    letter-spacing: 0.02em;
+  }
+}
+
+/* TinaMarkdown and ReactMarkdown custom styling */
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  color: #e0e0e0;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+  font-family: 'Orbitron', 'Share Tech Mono', monospace;
+}
+
+/* Specific font sizes for each heading level */
+.prose h1 {
+  font-size: 1.5rem; /* 24px - good for section headings */
+  font-weight: 700;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px rgba(97, 218, 251, 0.2);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose h2 {
+  font-size: 1.25rem; /* 20px */
+  font-weight: 600;
+  color: var(--neon-red);
+  margin-top: 1.75rem;
+  margin-bottom: 0.875rem;
+}
+
+.prose h3 {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose h4 {
+  font-size: 1rem; /* 16px - same as body but bold */
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.prose h5 {
+  font-size: 0.875rem; /* 14px */
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.prose h6 {
+  font-size: 0.75rem; /* 12px */
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.prose p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: rgba(224, 224, 224, 0.9);
+  white-space: pre-wrap; /* Preserve whitespace and line breaks */
+}
+
+/* Add whitespace preservation for all prose content */
+.prose {
+  white-space: pre-wrap;
+}
+
+/* Ensure TinaMarkdown content preserves spacing */
+.prose > * {
+  white-space: pre-wrap;
+}
+
+/* Specific handling for line breaks in TinaMarkdown */
+.prose br {
+  display: block;
+  margin: 0.5rem 0;
+  content: "";
+}
+
+.prose ul, .prose ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  margin-top: 0; /* Add this to reduce top spacing */
+}
+
+/* Reduce spacing between list items */
+.prose li {
+  margin-bottom: 0.25rem; /* Reduced from 0.5rem */
+  white-space: pre-wrap;
+}
+
+/* Remove extra spacing for nested lists */
+.prose li > ul,
+.prose li > ol {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Ensure first and last list items don't have extra spacing */
+.prose li:first-child {
+  margin-top: 0;
+}
+
+.prose li:last-child {
+  margin-bottom: 0;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--neon-cyan);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: rgba(224, 224, 224, 0.8);
+}
+
+.prose strong {
+  font-weight: bold;
+  color: #e0e0e0;
+}
+
+.prose em {
+  font-style: italic;
+  color: rgba(224, 224, 224, 0.9);
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid rgba(97, 218, 251, 0.3);
+  margin: 2rem 0;
+}
+
+.prose code {
+  background: rgba(97, 218, 251, 0.1);
+  color: var(--neon-cyan);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.prose pre {
+  background: rgba(16, 18, 27, 0.8);
+  border: 1px solid rgba(97, 218, 251, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+/* Enhanced finding title styling */
+.finding-title {
+  font-family: 'Orbitron', 'Share Tech Mono', monospace;
+  font-weight: 700;
+  font-size: 1.875rem; /* 30px */
+  color: var(--text-primary);
+  text-shadow: 
+    0 0 10px rgba(224, 224, 224, 0.3),
+    0 0 20px rgba(97, 218, 251, 0.2);
+  letter-spacing: 0.02em;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.finding-title:hover {
+  text-shadow: 
+    0 0 15px rgba(224, 224, 224, 0.4),
+    0 0 25px rgba(97, 218, 251, 0.3),
+    0 0 35px rgba(97, 218, 251, 0.1);
+  transform: translateY(-1px);
+}
+
+.cyber-glow {
+  position: relative;
+  display: inline-block;
+  animation: cyber-pulse 3s ease-in-out infinite;
+}
+
+.cyber-glow::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--neon-cyan);
+  filter: blur(2px);
+  opacity: 0.7;
+  z-index: -1;
+}
+
+@keyframes cyber-pulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px var(--neon-cyan),
+      0 0 10px var(--neon-cyan),
+      0 0 15px var(--neon-cyan);
+    opacity: 1;
+  }
+  50% {
+    text-shadow: 
+      0 0 8px var(--neon-cyan),
+      0 0 15px var(--neon-cyan),
+      0 0 25px var(--neon-cyan),
+      0 0 35px var(--neon-cyan);
+    opacity: 0.9;
+  }
+}
+
+/* Primary cyber button matching color scheme */
+.cyber-button-primary {
+  background: linear-gradient(135deg, 
+    var(--neon-red) 0%,
+    #cc3333 50%,
+    var(--neon-red) 100%);
+  border: 1px solid var(--neon-red);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 0 10px rgba(255, 77, 77, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.cyber-button-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent);
+  transition: left 0.5s;
+}
+
+.cyber-button-primary:hover {
+  background: linear-gradient(135deg, 
+    #ff6666 0%,
+    var(--neon-cyan) 50%,
+    #ff6666 100%);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(255, 77, 77, 0.4),
+    0 0 20px rgba(255, 77, 77, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: #ff6666;
+}
+
+.cyber-button-primary:hover::before {
+  left: 100%;
+}
+
+.cyber-button-primary:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 4px 15px rgba(255, 77, 77, 0.3),
+    0 0 15px rgba(255, 77, 77, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced glass panel */
+.glass-panel-enhanced {
+  background: linear-gradient(135deg, 
+    rgba(16, 18, 27, 0.4) 0%,
+    rgba(16, 18, 27, 0.6) 50%,
+    rgba(16, 18, 27, 0.3) 100%);
+  backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(97, 218, 251, 0.2);
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-panel-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(97, 218, 251, 0.05) 0%,
+    transparent 50%,
+    rgba(255, 77, 77, 0.03) 100%);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.glass-panel-enhanced:hover {
+  border-color: rgba(97, 218, 251, 0.4);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(97, 218, 251, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.glass-button:hover::before {
+  left: 100%;
+}
+
+/* Utility classes for color scheme */
+.text-neon-cyan {
+  color: var(--neon-cyan);
+}
+
+.text-neon-red {
+  color: var(--neon-red);
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 640px) {
+  .glass-panel-enhanced {
+    margin: 1rem;
+    border-radius: 16px;
+  }
+  
+  .glass-panel-enhanced::before {
+    border-radius: 16px;
+  }
+  
+  .cyberpunk-title {
+    letter-spacing: 0.02em;
+  }
+  
+  .cyberpunk-title-glow {
+    letter-spacing: 0.02em;
+  }
+}
+
+.prose em {
+  font-style: italic;
+  color: rgba(224, 224, 224, 0.9);
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid rgba(97, 218, 251, 0.3);
+  margin: 2rem 0;
+}
+
+.prose code {
+  background: rgba(97, 218, 251, 0.1);
+  color: var(--neon-cyan);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.prose pre {
+  background: rgba(16, 18, 27, 0.8);
+  border: 1px solid rgba(97, 218, 251, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+/* Enhanced finding title styling */
+.finding-title {
+  font-family: 'Orbitron', 'Share Tech Mono', monospace;
+  font-weight: 700;
+  font-size: 1.875rem; /* 30px */
+  color: var(--text-primary);
+  text-shadow: 
+    0 0 10px rgba(224, 224, 224, 0.3),
+    0 0 20px rgba(97, 218, 251, 0.2);
+  letter-spacing: 0.02em;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.finding-title:hover {
+  text-shadow: 
+    0 0 15px rgba(224, 224, 224, 0.4),
+    0 0 25px rgba(97, 218, 251, 0.3),
+    0 0 35px rgba(97, 218, 251, 0.1);
+  transform: translateY(-1px);
+}
+
+.cyber-glow {
+  position: relative;
+  display: inline-block;
+  animation: cyber-pulse 3s ease-in-out infinite;
+}
+
+.cyber-glow::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--neon-cyan);
+  filter: blur(2px);
+  opacity: 0.7;
+  z-index: -1;
+}
+
+@keyframes cyber-pulse {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px var(--neon-cyan),
+      0 0 10px var(--neon-cyan),
+      0 0 15px var(--neon-cyan);
+    opacity: 1;
+  }
+  50% {
+    text-shadow: 
+      0 0 8px var(--neon-cyan),
+      0 0 15px var(--neon-cyan),
+      0 0 25px var(--neon-cyan),
+      0 0 35px var(--neon-cyan);
+    opacity: 0.9;
+  }
+}
+
+/* Primary cyber button matching color scheme */
+.cyber-button-primary {
+  background: linear-gradient(135deg, 
+    var(--neon-red) 0%,
+    #cc3333 50%,
+    var(--neon-red) 100%);
+  border: 1px solid var(--neon-red);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 0 10px rgba(255, 77, 77, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.cyber-button-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent);
+  transition: left 0.5s;
+}
+
+.cyber-button-primary:hover {
+  background: linear-gradient(135deg, 
+    #ff6666 0%,
+    var(--neon-cyan) 50%,
+    #ff6666 100%);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(255, 77, 77, 0.4),
+    0 0 20px rgba(255, 77, 77, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: #ff6666;
+}
+
+.cyber-button-primary:hover::before {
+  left: 100%;
+}
+
+.cyber-button-primary:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 4px 15px rgba(255, 77, 77, 0.3),
+    0 0 15px rgba(255, 77, 77, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced glass panel */
+.glass-panel-enhanced {
+  background: linear-gradient(135deg, 
+    rgba(16, 18, 27, 0.4) 0%,
+    rgba(16, 18, 27, 0.6) 50%,
+    rgba(16, 18, 27, 0.3) 100%);
+  backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(97, 218, 251, 0.2);
+  border-radius: 20px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-panel-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(97, 218, 251, 0.05) 0%,
+    transparent 50%,
+    rgba(255, 77, 77, 0.03) 100%);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.glass-panel-enhanced:hover {
+  border-color: rgba(97, 218, 251, 0.4);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(97, 218, 251, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.glass-button:hover::before {
+  left: 100%;
+}
+
+/* Utility classes for color scheme */
+.text-neon-cyan {
+  color: var(--neon-cyan);
+}
+
+.text-neon-red {
+  color: var(--neon-red);
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 640px) {
+  .glass-panel-enhanced {
+    margin: 1rem;
+    border-radius: 16px;
+  }
+  
+  .glass-panel-enhanced::before {
+    border-radius: 16px;
+  }
+  
+  .cyberpunk-title {
+    letter-spacing: 0.02em;
+  }
+  
+  .cyberpunk-title-glow {
+    letter-spacing: 0.02em;
+  }
+}
+
+

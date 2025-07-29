@@ -1,0 +1,9 @@
+{
+  "category": "income",
+  "week": "2025-07-week-5",
+  "data": {
+    "value": 1000,
+    "unit": "USD",
+    "trend": "down"
+  }
+}

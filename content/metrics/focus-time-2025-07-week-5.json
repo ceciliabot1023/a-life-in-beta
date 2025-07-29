@@ -1,0 +1,9 @@
+{
+  "category": "focus-time",
+  "week": "2025-07-week-5",
+  "data": {
+    "value": 10,
+    "unit": "hours",
+    "trend": "down"
+  }
+}
