@@ -17,7 +17,7 @@ interface Finding {
   category: string
   date: string
   week: string
-  body: unknown
+  body: any
 }
 
 export default function FindingDetailPage() {
