@@ -112,7 +112,7 @@ export default function FindingDetailPage() {
             </h1>
             <div className="flex items-center space-x-4 text-white/60">
               <span className="text-2xl">{params.category === 'work' ? '💼' : '🌱'}</span>
-              <span>{params.category?.toUpperCase()} Finding</span>
+              <span>{params.category?.toString().toUpperCase()} Finding</span>
               <span>•</span>
               <span>
                 {new Date(finding.date).toLocaleDateString('en-US', { 
