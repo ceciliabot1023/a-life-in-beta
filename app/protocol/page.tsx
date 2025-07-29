@@ -110,7 +110,7 @@ export default function ProtocolPage() {
                       <ul className="text-white/80 text-sm space-y-1">
                         <li>• <strong>Relax</strong> to restore creative energy</li>
                         <li>• <strong>Reflect</strong> to refine understanding</li>
-                        <li>• <strong>Revive</strong> to reimagine what's possible</li>
+                        <li>• <strong>Revive</strong> to reimagine what&apos;s possible</li>
                       </ul>
                     </div>
                   </div>
