@@ -12,7 +12,8 @@ interface Finding {
   category: string
   week: string
   date: string
-  body: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body: any  // TinaMarkdown requires 'any' type for rich-text content
 }
 
 export function FindingsPanel() {

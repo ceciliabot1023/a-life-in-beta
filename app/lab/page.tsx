@@ -20,8 +20,10 @@ interface App {
   id: string
   title: string
   status: string
-  description: unknown // Changed from any to unknown
-  body: unknown
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  description: any  // TinaMarkdown requires 'any' type for rich-text content
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body: any  // TinaMarkdown requires 'any' type for rich-text content
 }
 
 export default function LabPage() {

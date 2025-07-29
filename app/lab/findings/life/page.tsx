@@ -15,7 +15,8 @@ interface Finding {
   title: string
   category: string
   date: string
-  body: unknown
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body: any  // TinaMarkdown requires 'any' type for rich-text content
 }
 
 export default function LifeFindingsPage() {
