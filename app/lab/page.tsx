@@ -379,16 +379,16 @@ export default function LabPage() {
                 </div>
               </div>
               
-              {/* Support Section - Update Buy Me a Coffee */}
+              {/* Support Section - Update to Ko-fi */}
               <a 
-                href="coff.ee/liutaoyu10j" 
+                href="https://ko-fi.com/ceciliatiantian" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-400/30 hover:border-yellow-400/50 rounded-lg transition-all duration-300 group hover:scale-105"
               >
                 <Coffee className="w-4 h-4 text-yellow-300 group-hover:text-yellow-200 transition-colors" />
                 <span className="text-yellow-300 group-hover:text-yellow-200 text-sm font-medium transition-colors">
-                  <span className="hidden sm:inline">Buy me a Coffee</span>
+                  <span className="hidden sm:inline">Support on Ko-fi</span>
                   <span className="sm:hidden">Support</span>
                 </span>
               </a>
