@@ -101,7 +101,7 @@ export default function FindingDetailPage() {
       <main className="pt-20 pb-8">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="mb-8">
-            <Link href={`/lab/findings/${params.category?.toLowerCase()}`}>
+            <Link href={`/lab/findings/${params.category?.toString().toLowerCase()}`}>
               <Button variant="ghost" size="sm" className="mb-4">
                 <ArrowLeft size={16} className="mr-2" />
                 Back to {params.category} Findings
