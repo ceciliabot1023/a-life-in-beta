@@ -49,7 +49,14 @@ export default function FindingDetailPage() {
           category: edge?.node?.category || '',
           date: edge?.node?.date || '',
           week: edge?.node?.week || '',
-          body: edge?.node?.body
+          body: edge?.node?.body,
+          _sys: {
+            filename: edge?.node?._sys?.filename || '',
+            basename: edge?.node?._sys?.basename || '',
+            path: edge?.node?._sys?.path || '',
+            relativePath: edge?.node?._sys?.relativePath || '',
+            extension: edge?.node?._sys?.extension || ''
+          }
         })) || []
         
         // Find the specific finding by slug (title converted to slug)
