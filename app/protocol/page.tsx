@@ -37,37 +37,37 @@ export default function ProtocolPage() {
                   <div className="border-l-4 border-red-400 pl-6 bg-red-500/10 p-4 rounded-r-lg">
                     <h4 className="text-lg font-semibold text-red-400 mb-2">Life_v1: The Scientist</h4>
                     <p className="text-sm">
-                      On paper, this build was perfect. A prestigious path at the Chinese Academy of Sciences. But the code wouldn't compile. My internal debugger kept throwing the same error: <em>This isn't you.</em>
+                      On paper, this build was perfect. A prestigious path at the Chinese Academy of Sciences. But the code wouldn&apos;t compile. My internal debugger kept throwing the same error: <em>This isn&apos;t you.</em>
                     </p>
                   </div>
                   
                   <div className="border-l-4 border-orange-400 pl-6 bg-orange-500/10 p-4 rounded-r-lg">
                     <h4 className="text-lg font-semibold text-orange-400 mb-2">Life_v2: The World-Changer</h4>
                     <p className="text-sm">
-                      I pivoted, pushing a new feature set: "global impact" at the World Resources Institute and the World Bank. The mission was inspiring, but the system architecture was too slow. I was a fast processor trapped on a dial-up connection, watching my energy drain away in bureaucratic lag.
+                      I pivoted, pushing a new feature set: &quot;global impact&quot; at the World Resources Institute and the World Bank. The mission was inspiring, but the system architecture was too slow. I was a fast processor trapped on a dial-up connection, watching my energy drain away in bureaucratic lag.
                     </p>
                   </div>
                   
                   <div className="border-l-4 border-purple-400 pl-6 bg-purple-500/10 p-4 rounded-r-lg">
                     <h4 className="text-lg font-semibold text-purple-400 mb-2">Life_v3: The Tech Builder</h4>
                     <p className="text-sm">
-                      At TikTok, I hit peak performance. The specs were incredible—great title, thrilling work, a masterclass in scale. But running on someone else's operating system, no matter how fast, led to a critical system error: a deep sense of meaninglessness.
+                      At TikTok, I hit peak performance. The specs were incredible&mdash;great title, thrilling work, a masterclass in scale. But running on someone else&apos;s operating system, no matter how fast, led to a critical system error: a deep sense of meaninglessness.
                     </p>
                   </div>
                   
                   <div className="border-l-4 border-cyan-400 pl-6 bg-cyan-500/10 p-4 rounded-r-lg">
                     <h4 className="text-lg font-semibold text-cyan-400 mb-2">Life_v4: The Current Build</h4>
                     <p className="text-sm mb-3">
-                      That error was the best thing that could have happened. It forced me to stop shipping features and finally read my own source code. In the quiet space of that pause, I wasn't just debugging; I was rediscovering the core programming that had been there all along.
+                      That error was the best thing that could have happened. It forced me to stop shipping features and finally read my own source code. In the quiet space of that pause, I wasn&apos;t just debugging; I was rediscovering the core programming that had been there all along.
                     </p>
                     <p className="text-sm">
-                      This version—Life_v4—I'm currently building, is a coach, an indie app developer, and a solopreneur. It's the most authentic, agile, and joyful build yet. It's designed not for perfection, but for learning, connection, and continuous growth. And it's open-source.
+                      This version&mdash;Life_v4&mdash;I&apos;m currently building, is a coach, an indie app developer, and a solopreneur. It&apos;s the most authentic, agile, and joyful build yet. It&apos;s designed not for perfection, but for learning, connection, and continuous growth. And it&apos;s open-source.
                     </p>
                   </div>
                   
                   <div className="bg-white/10 p-6 rounded-lg border border-cyan-400/30">
                     <p className="text-center italic">
-                      "What if my life wasn't a product to be perfected, but a process to be explored? What if every 'failure' was just data?"
+                      &quot;What if my life wasn&apos;t a product to be perfected, but a process to be explored? What if every &apos;failure&apos; was just data?&quot;
                     </p>
                   </div>
                   

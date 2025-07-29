@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -29,27 +30,29 @@ export default function LabPage() {
   const [loading, setLoading] = useState(true)
   
   // Function to extract images from app body content
-  const extractImagesFromBody = (body: any) => {
+  const extractImagesFromBody = (body: unknown) => {
     if (!body) return []
     
     const images: { id: number, title: string, image: string, description: string }[] = []
     
     // Function to recursively search for images in the body structure
-    const findImages = (content: any) => {
+    const findImages = (content: unknown) => {
       if (Array.isArray(content)) {
         content.forEach(findImages)
       } else if (content && typeof content === 'object') {
-        if (content.type === 'img' && content.url) {
+        const obj = content as Record<string, unknown>
+        if (obj.type === 'img' && obj.url) {
           images.push({
             id: images.length + 1,
-            title: `Screen ${images.length + 1}`,
-            image: content.url,
-            description: content.alt || 'App screenshot'
+            title: (obj.alt as string) || 'App Screenshot',
+            image: obj.url as string,
+            description: (obj.caption as string) || 'Application interface'
           })
         }
-        // Check children
-        if (content.children) {
-          findImages(content.children)
+        
+        // Recursively search in children
+        if (obj.children) {
+          findImages(obj.children)
         }
       }
     }
@@ -201,17 +204,14 @@ export default function LabPage() {
                                       const currentImage = appImages[currentMockup] || appImages[0]
                                       return (
                                         <>
-                                          <img 
+                                          <Image 
                                             src={currentImage.image} 
                                             alt={currentImage.title}
-                                            className="absolute inset-0 w-full h-full object-contain bg-black/20 rounded"
+                                            fill
+                                            className="object-contain bg-black/20 rounded"
                                             style={{
                                               maxHeight: '400px',
                                               objectPosition: 'center'
-                                            }}
-                                            onError={(e) => {
-                                              e.currentTarget.style.display = 'none'
-                                              e.currentTarget.nextElementSibling.style.display = 'flex'
                                             }}
                                           />
                                           <div className="absolute inset-0 flex items-center justify-center text-center bg-gradient-to-br from-blue-500/20 to-purple-600/20" style={{display: 'none'}}>
@@ -266,7 +266,7 @@ export default function LabPage() {
                     <h3 className="cyberpunk-title text-2xl font-bold text-white mb-4">
                       <span className="text-neon-green cyber-glow">Life Coaching Service</span>
                     </h3>
-                    {apps.filter(app => app.title.toLowerCase().includes('coaching') || app.title.toLowerCase().includes('life')).map((app, index) => (
+                    {apps.filter(app => app.title.toLowerCase().includes('coaching') || app.title.toLowerCase().includes('life')).map((app) => (
                       <div key={app.id} className="glass-panel">
                         <div className="p-6">
                           <div className="flex items-center gap-3 mb-6">
