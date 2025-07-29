@@ -27,7 +27,7 @@ export default function ProtocolPage() {
                   <div>
                     <h3 className="text-xl font-semibold text-cyan-400 mb-3">Welcome to My Life in Beta</h3>
                     <p className="mb-4">
-                      For years, I treated my life like a final product that needed to be perfect. The problem was, I was working off someone else's blueprint. This is the story of how I stopped trying to ship a flawless version 1.0 and learned to embrace my life in a perpetual, evolving beta.
+                      For years, I treated my life like a final product that needed to be perfect. The problem was, I was working off someone else&apos;s blueprint. This is the story of how I stopped trying to ship a flawless version 1.0 and learned to embrace my life in a perpetual, evolving beta.
                     </p>
                     <p className="mb-4">
                       My career has been a series of experiments—each one a different build, a new hypothesis.
@@ -139,13 +139,13 @@ export default function ProtocolPage() {
                     <div>
                       <h3 className="text-lg font-semibold text-yellow-400 mb-2">Research Question:</h3>
                       <p className="text-white/90 text-sm">
-                        Can one escape the 9-to-5 grind (or China's "996" culture) for sovereign freedom while maintaining financial stability?
+                        Can one escape the 9-to-5 grind (or China&apos;s &quot;996&quot; culture) for sovereign freedom while maintaining financial stability?
                       </p>
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-green-400 mb-2">Hypothesis:</h3>
                       <p className="text-white/90 text-sm">
-                        Yes. Through a designed "free life flow" and "free work flow" system, working one hyper-focused day (24 hours) per week can generate above-average monthly income while creating a measurably healthier, happier existence.
+                        Yes. Through a designed &quot;free life flow&quot; and &quot;free work flow&quot; system, working one hyper-focused day (24 hours) per week can generate above-average monthly income while creating a measurably healthier, happier existence.
                       </p>
                     </div>
                   </div>
