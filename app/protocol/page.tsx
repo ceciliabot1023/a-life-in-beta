@@ -72,11 +72,11 @@ export default function ProtocolPage() {
                   </div>
                   
                   <p className="text-center">
-                    This space is the living changelog of that journey. It's where I document the experiments, reflect on the data, and share the tools I'm building along the way.
+                    This space is the living changelog of that journey. It&apos;s where I document the experiments, reflect on the data, and share the tools I&apos;m building along the way.
                   </p>
                   
                   <p className="text-center font-semibold text-cyan-400">
-                    If you're also tired of chasing a flawless final version and are ready to embrace your own beautiful, messy, and powerful life in beta—you're in the right place. Let's connect and build what's next, together.
+                    If you&apos;re also tired of chasing a flawless final version and are ready to embrace your own beautiful, messy, and powerful life in beta&mdash;you&apos;re in the right place. Let&apos;s connect and build what&apos;s next, together.
                   </p>
                 </div>
               </div>

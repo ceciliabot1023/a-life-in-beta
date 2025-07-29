@@ -43,7 +43,7 @@ export class WeeklyArchiver {
       const metricsPath = path.join(this.contentDir, 'metrics', `${weekId}.json`)
       const metricsData = await fs.readFile(metricsPath, 'utf-8')
       return JSON.parse(metricsData)
-    } catch (error) {
+    } catch {
       console.warn(`No metrics found for week ${weekId}`)
       return null
     }
