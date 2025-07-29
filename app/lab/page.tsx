@@ -392,7 +392,6 @@ export default function LabPage() {
                   <span className="sm:hidden">Support</span>
                 </span>
               </a>
-              </div>
             </div>
           </div>
         </div>
