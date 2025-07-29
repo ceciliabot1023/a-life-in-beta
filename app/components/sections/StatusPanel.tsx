@@ -27,7 +27,11 @@ export function StatusPanel() {
         const metricsData = response.data.metricsConnection.edges?.map(edge => ({
           category: edge?.node?.category || '',
           week: edge?.node?.week || '',
-          data: edge?.node?.data || { value: 0, unit: '', trend: '' }
+          data: {
+            value: edge?.node?.data?.value ?? 0,
+            unit: edge?.node?.data?.unit ?? '',
+            trend: edge?.node?.data?.trend ?? ''
+          }
         })) || []
         
         // Get the most recent metric for each category
