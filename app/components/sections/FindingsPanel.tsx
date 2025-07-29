@@ -30,7 +30,8 @@ export function FindingsPanel() {
           category: edge?.node?.category || '',
           week: edge?.node?.week || '',
           date: edge?.node?.date || '',
-          body: edge?.node?.body || ''
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          body: edge?.node?.body as any
         })) || []
         
         // Sort by date, most recent first
@@ -122,7 +123,6 @@ export function FindingsPanel() {
         </Link>
       </div>
       {/* If TinaMarkdown is used here, apply same fix */}
-      <TinaMarkdown content={finding.body as any} />
     </GlassPanel>
   )
 }

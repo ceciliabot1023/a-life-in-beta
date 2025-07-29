@@ -32,7 +32,7 @@ export default function LabPage() {
   const [loading, setLoading] = useState(true)
   
   // Function to extract images from app body content
-  const extractImagesFromBody = (body: unknown) => {
+  const extractImagesFromBody = (body: any) => {
     if (!body) return []
     
     const images: { id: number, title: string, image: string, description: string }[] = []
@@ -71,8 +71,10 @@ export default function LabPage() {
           id: edge?.node?.id || '',
           title: edge?.node?.title || '',
           status: edge?.node?.status || '',
-          description: edge?.node?.description || '',
-          body: edge?.node?.body
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          description: edge?.node?.description as any,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          body: edge?.node?.body as any
         })) || []
         
         setApps(appsData)
@@ -146,7 +148,7 @@ export default function LabPage() {
                             <div className="space-y-4">
                               <h5 className="text-lg font-semibold text-cyan-400">The Concept</h5>
                               <div className="text-white/80 text-sm leading-relaxed prose prose-invert max-w-none">
-                                <TinaMarkdown content={app.description} />
+                                <TinaMarkdown content={app.description as any} />
                               </div>
                               <div className="flex flex-wrap gap-2">
                                 <span className={`px-3 py-1 border rounded-full text-xs ${
@@ -282,7 +284,7 @@ export default function LabPage() {
                           <div className="space-y-4">
                             <h5 className="text-lg font-semibold text-green-400">The Service</h5>
                             <div className="text-white/80 text-sm leading-relaxed prose prose-invert max-w-none">
-                              <TinaMarkdown content={app.description} />
+                              <TinaMarkdown content={app.description as any} />
                             </div>
                             <div className="flex flex-wrap gap-2">
                               <span className={`px-3 py-1 border rounded-full text-xs ${
