@@ -17,7 +17,8 @@ interface Finding {
   category: string
   week: string
   date: string
-  body: Record<string, unknown> | null  // Changed from 'any' to avoid ESLint error
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  body: any | null  // TinaMarkdown requires 'any' type for rich-text content
   _sys: {
     filename: string
     basename: string
