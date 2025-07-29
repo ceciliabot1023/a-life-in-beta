@@ -9,14 +9,13 @@ import { ArrowLeft } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import client from '../../../../tina/__generated__/client'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
-import ReactMarkdown from 'react-markdown'
 
 interface Finding {
   id: string
   title: string
   category: string
   date: string
-  body: any
+  body: unknown
 }
 
 export default function WorkFindingsPage() {
@@ -88,8 +87,8 @@ export default function WorkFindingsPage() {
           </div>
           
           <div className="space-y-8">
-            // In the findings map section, wrap each finding with a Link:
-            {findings.map((finding, index) => {
+            {/* In the findings map section, wrap each finding with a Link: */}
+            {findings.map((finding) => {
               const slug = finding.title.toLowerCase().replace(/\s+/g, '-')
               
               return (

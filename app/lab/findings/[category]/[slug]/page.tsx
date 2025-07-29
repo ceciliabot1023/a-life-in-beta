@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import client from '../../../../../tina/__generated__/client'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
-import ReactMarkdown from 'react-markdown'
 
 interface Finding {
   id: string
@@ -18,7 +17,7 @@ interface Finding {
   category: string
   date: string
   week: string
-  body: any
+  body: unknown
 }
 
 export default function FindingDetailPage() {

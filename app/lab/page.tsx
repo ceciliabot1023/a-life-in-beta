@@ -19,8 +19,8 @@ interface App {
   id: string
   title: string
   status: string
-  description: any // Changed from string to any to handle rich text
-  body: any
+  description: unknown // Changed from any to unknown
+  body: unknown
 }
 
 export default function LabPage() {
@@ -94,7 +94,7 @@ export default function LabPage() {
               The <span className="text-neon-red cyber-glow">Lab</span>
             </h1>
             <p className="text-white/80 text-lg max-w-2xl mx-auto">
-              Welcome to the command center. Here you'll find real-time experiment data, 
+              Welcome to the command center. Here you&apos;ll find real-time experiment data, 
               research findings, and the products emerging from this ongoing life redesign.
             </p>
           </div>
@@ -125,7 +125,7 @@ export default function LabPage() {
                     <h3 className="cyberpunk-title text-2xl font-bold text-white mb-4">
                       <span className="text-neon-cyan cyber-glow">Indie App</span>
                     </h3>
-                    {apps.filter(app => app.title.toLowerCase().includes('app') || app.status === 'development').map((app, index) => (
+                    {apps.filter(app => app.title.toLowerCase().includes('app') || app.status === 'development').map((app) => (
                       <div key={app.id} className="glass-panel">
                         <div className="p-6">
                           <div className="flex items-center gap-3 mb-6">

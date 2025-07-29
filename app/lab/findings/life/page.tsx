@@ -9,14 +9,13 @@ import { ArrowLeft } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import client from '../../../../tina/__generated__/client'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
-import ReactMarkdown from 'react-markdown'
 
 interface Finding {
   id: string
   title: string
   category: string
   date: string
-  body: any
+  body: unknown
 }
 
 export default function LifeFindingsPage() {
