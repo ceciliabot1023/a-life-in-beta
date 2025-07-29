@@ -15,9 +15,16 @@ interface Finding {
   id: string
   title: string
   category: string
-  date: string
   week: string
-  body: any  // Changed from 'unknown' to 'any'
+  date: string
+  body: Record<string, unknown> | null  // Changed from 'any' to avoid ESLint error
+  _sys: {
+    filename: string
+    basename: string
+    path: string
+    relativePath: string
+    extension: string
+  }
 }
 
 export default function FindingDetailPage() {
@@ -29,11 +36,33 @@ export default function FindingDetailPage() {
     async function fetchFinding() {
       try {
         const response = await client.queries.findingsConnection({
+          // Line 34 - in the TinaCMS query filter
           filter: {
             category: {
               eq: params.category?.toString().toUpperCase()
             }
           }
+          
+          // Line 75 - in the breadcrumb link
+          <Link 
+            href={`/lab/findings/${params.category?.toString().toLowerCase()}`}
+            className="text-neon-cyan hover:text-white transition-colors"
+          >
+            {params.category?.toString().toUpperCase()}
+          </Link>
+          
+          // Line 104 - in the category navigation link
+          <Link 
+            href={`/lab/findings/${params.category?.toString().toLowerCase()}`}
+            className="text-white/60 hover:text-white transition-colors"
+          >
+            ← Back to {params.category?.toString().toLowerCase()}
+          </Link>
+          
+          // Line 115 - in the category display
+          <span className="text-neon-cyan font-medium">
+            {params.category?.toString().toUpperCase()}
+          </span>
         })
         
         const findings = response.data.findingsConnection.edges?.map(edge => ({
