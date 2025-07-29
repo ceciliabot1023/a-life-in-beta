@@ -102,31 +102,19 @@ export default function LifeFindingsPage() {
                   <Link href={`/lab/findings/life/${slug}`}>
                     <GlassPanel className="p-6 hover:bg-white/10 transition-all duration-300 cursor-pointer">
                       <div className="flex items-center space-x-3 mb-6">
-                        <span className="text-3xl">🌟</span>
-                        <h2 className="cyberpunk-title-glow text-3xl font-bold text-white">{finding.title}</h2>
-                      </div>
-                      
-                      <div className="bg-white/5 p-4 rounded-lg border border-white/10">
-                        <div className="text-white/70 text-sm leading-relaxed mb-2">
-                          // Add at the top of the file
-                          interface FindingBody {
-                            type: string;
-                            children: any[];
-                          }
-                          
-                          // Type guard function
-                          const renderMarkdownContent = (body: unknown) => {
-                            if (body && typeof body === 'object') {
-                              return <TinaMarkdown content={body as FindingBody} />;
-                            }
-                            return null;
-                          };
-                          
-                          // Usage in JSX
-                          <div className="prose prose-invert prose-sm max-w-none prose-headings:text-white prose-headings:font-bold prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-p:mb-4 prose-p:leading-relaxed line-clamp-3">
-                            {renderMarkdownContent(finding.body)}
-                          </div>
-                        </div>
+                        // Replace lines 105-120 with:
+                                        <span className="text-3xl">🌟</span>
+                                        <h2 className="cyberpunk-title-glow text-3xl font-bold text-white">{finding.title}</h2>
+                                      </div>
+                                      
+                                      <div className="bg-white/5 p-4 rounded-lg border border-white/10">
+                                        <div className="text-white/70 text-sm leading-relaxed mb-2">
+                                          <div className="prose prose-invert prose-sm max-w-none prose-headings:text-white prose-headings:font-bold prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-p:mb-4 prose-p:leading-relaxed line-clamp-3">
+                                            {finding.body && (
+                                              <TinaMarkdown content={finding.body as any} />
+                                            )}
+                                          </div>
+                                        </div>
                         <div className="text-white/40 text-xs">
                           {new Date(finding.date).toLocaleDateString('en-US', { 
                             month: 'short', 
