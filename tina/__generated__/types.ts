@@ -82,8 +82,8 @@ export type Query = {
   collections: Array<Collection>;
   node: Node;
   document: DocumentNode;
-  metrics_v2: Metrics_V2;
-  metrics_v2Connection: Metrics_V2Connection;
+  metrics: Metrics;
+  metricsConnection: MetricsConnection;
   findings: Findings;
   findingsConnection: FindingsConnection;
   apps: Apps;
@@ -112,18 +112,18 @@ export type QueryDocumentArgs = {
 };
 
 
-export type QueryMetrics_V2Args = {
+export type QueryMetricsArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type QueryMetrics_V2ConnectionArgs = {
+export type QueryMetricsConnectionArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<Metrics_V2Filter>;
+  filter?: InputMaybe<MetricsFilter>;
 };
 
 
@@ -157,7 +157,7 @@ export type QueryAppsConnectionArgs = {
 };
 
 export type DocumentFilter = {
-  metrics_v2?: InputMaybe<Metrics_V2Filter>;
+  metrics?: InputMaybe<MetricsFilter>;
   findings?: InputMaybe<FindingsFilter>;
   apps?: InputMaybe<AppsFilter>;
 };
@@ -199,10 +199,10 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Metrics_V2 | Findings | Apps | Folder;
+export type DocumentNode = Metrics | Findings | Apps | Folder;
 
-export type Metrics_V2 = Node & Document & {
-  __typename?: 'Metrics_v2';
+export type Metrics = Node & Document & {
+  __typename?: 'Metrics';
   category: Scalars['String']['output'];
   week: Scalars['String']['output'];
   value?: Maybe<Scalars['Float']['output']>;
@@ -230,7 +230,7 @@ export type NumberFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
 };
 
-export type Metrics_V2Filter = {
+export type MetricsFilter = {
   category?: InputMaybe<StringFilter>;
   week?: InputMaybe<StringFilter>;
   value?: InputMaybe<NumberFilter>;
@@ -238,17 +238,17 @@ export type Metrics_V2Filter = {
   trend?: InputMaybe<StringFilter>;
 };
 
-export type Metrics_V2ConnectionEdges = {
-  __typename?: 'Metrics_v2ConnectionEdges';
+export type MetricsConnectionEdges = {
+  __typename?: 'MetricsConnectionEdges';
   cursor: Scalars['String']['output'];
-  node?: Maybe<Metrics_V2>;
+  node?: Maybe<Metrics>;
 };
 
-export type Metrics_V2Connection = Connection & {
-  __typename?: 'Metrics_v2Connection';
+export type MetricsConnection = Connection & {
+  __typename?: 'MetricsConnection';
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<Metrics_V2ConnectionEdges>>>;
+  edges?: Maybe<Array<Maybe<MetricsConnectionEdges>>>;
 };
 
 export type Findings = Node & Document & {
@@ -336,8 +336,8 @@ export type Mutation = {
   deleteDocument: DocumentNode;
   createDocument: DocumentNode;
   createFolder: DocumentNode;
-  updateMetrics_v2: Metrics_V2;
-  createMetrics_v2: Metrics_V2;
+  updateMetrics: Metrics;
+  createMetrics: Metrics;
   updateFindings: Findings;
   createFindings: Findings;
   updateApps: Apps;
@@ -378,15 +378,15 @@ export type MutationCreateFolderArgs = {
 };
 
 
-export type MutationUpdateMetrics_V2Args = {
+export type MutationUpdateMetricsArgs = {
   relativePath: Scalars['String']['input'];
-  params: Metrics_V2Mutation;
+  params: MetricsMutation;
 };
 
 
-export type MutationCreateMetrics_V2Args = {
+export type MutationCreateMetricsArgs = {
   relativePath: Scalars['String']['input'];
-  params: Metrics_V2Mutation;
+  params: MetricsMutation;
 };
 
 
@@ -414,19 +414,19 @@ export type MutationCreateAppsArgs = {
 };
 
 export type DocumentUpdateMutation = {
-  metrics_v2?: InputMaybe<Metrics_V2Mutation>;
+  metrics?: InputMaybe<MetricsMutation>;
   findings?: InputMaybe<FindingsMutation>;
   apps?: InputMaybe<AppsMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
-  metrics_v2?: InputMaybe<Metrics_V2Mutation>;
+  metrics?: InputMaybe<MetricsMutation>;
   findings?: InputMaybe<FindingsMutation>;
   apps?: InputMaybe<AppsMutation>;
 };
 
-export type Metrics_V2Mutation = {
+export type MetricsMutation = {
   category?: InputMaybe<Scalars['String']['input']>;
   week?: InputMaybe<Scalars['String']['input']>;
   value?: InputMaybe<Scalars['Float']['input']>;
@@ -449,30 +449,30 @@ export type AppsMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type Metrics_V2PartsFragment = { __typename: 'Metrics_v2', category: string, week: string, value?: number | null, unit?: string | null, trend?: string | null };
+export type MetricsPartsFragment = { __typename: 'Metrics', category: string, week: string, value?: number | null, unit?: string | null, trend?: string | null };
 
 export type FindingsPartsFragment = { __typename: 'Findings', title: string, category: string, week: string, date: string, body?: any | null };
 
 export type AppsPartsFragment = { __typename: 'Apps', title: string, status?: string | null, description?: any | null, body?: any | null };
 
-export type Metrics_V2QueryVariables = Exact<{
+export type MetricsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type Metrics_V2Query = { __typename?: 'Query', metrics_v2: { __typename: 'Metrics_v2', id: string, category: string, week: string, value?: number | null, unit?: string | null, trend?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type MetricsQuery = { __typename?: 'Query', metrics: { __typename: 'Metrics', id: string, category: string, week: string, value?: number | null, unit?: string | null, trend?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
-export type Metrics_V2ConnectionQueryVariables = Exact<{
+export type MetricsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<Metrics_V2Filter>;
+  filter?: InputMaybe<MetricsFilter>;
 }>;
 
 
-export type Metrics_V2ConnectionQuery = { __typename?: 'Query', metrics_v2Connection: { __typename?: 'Metrics_v2Connection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'Metrics_v2ConnectionEdges', cursor: string, node?: { __typename: 'Metrics_v2', id: string, category: string, week: string, value?: number | null, unit?: string | null, trend?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type MetricsConnectionQuery = { __typename?: 'Query', metricsConnection: { __typename?: 'MetricsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'MetricsConnectionEdges', cursor: string, node?: { __typename: 'Metrics', id: string, category: string, week: string, value?: number | null, unit?: string | null, trend?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type FindingsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -512,8 +512,8 @@ export type AppsConnectionQueryVariables = Exact<{
 
 export type AppsConnectionQuery = { __typename?: 'Query', appsConnection: { __typename?: 'AppsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AppsConnectionEdges', cursor: string, node?: { __typename: 'Apps', id: string, title: string, status?: string | null, description?: any | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
-export const Metrics_V2PartsFragmentDoc = gql`
-    fragment Metrics_v2Parts on Metrics_v2 {
+export const MetricsPartsFragmentDoc = gql`
+    fragment MetricsParts on Metrics {
   __typename
   category
   week
@@ -541,9 +541,9 @@ export const AppsPartsFragmentDoc = gql`
   body
 }
     `;
-export const Metrics_V2Document = gql`
-    query metrics_v2($relativePath: String!) {
-  metrics_v2(relativePath: $relativePath) {
+export const MetricsDocument = gql`
+    query metrics($relativePath: String!) {
+  metrics(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -556,13 +556,13 @@ export const Metrics_V2Document = gql`
       }
       id
     }
-    ...Metrics_v2Parts
+    ...MetricsParts
   }
 }
-    ${Metrics_V2PartsFragmentDoc}`;
-export const Metrics_V2ConnectionDocument = gql`
-    query metrics_v2Connection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: Metrics_v2Filter) {
-  metrics_v2Connection(
+    ${MetricsPartsFragmentDoc}`;
+export const MetricsConnectionDocument = gql`
+    query metricsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: MetricsFilter) {
+  metricsConnection(
     before: $before
     after: $after
     first: $first
@@ -592,12 +592,12 @@ export const Metrics_V2ConnectionDocument = gql`
           }
           id
         }
-        ...Metrics_v2Parts
+        ...MetricsParts
       }
     }
   }
 }
-    ${Metrics_V2PartsFragmentDoc}`;
+    ${MetricsPartsFragmentDoc}`;
 export const FindingsDocument = gql`
     query findings($relativePath: String!) {
   findings(relativePath: $relativePath) {
@@ -715,11 +715,11 @@ export const AppsConnectionDocument = gql`
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
-      metrics_v2(variables: Metrics_V2QueryVariables, options?: C): Promise<{data: Metrics_V2Query, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: Metrics_V2QueryVariables, query: string}> {
-        return requester<{data: Metrics_V2Query, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: Metrics_V2QueryVariables, query: string}, Metrics_V2QueryVariables>(Metrics_V2Document, variables, options);
+      metrics(variables: MetricsQueryVariables, options?: C): Promise<{data: MetricsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MetricsQueryVariables, query: string}> {
+        return requester<{data: MetricsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MetricsQueryVariables, query: string}, MetricsQueryVariables>(MetricsDocument, variables, options);
       },
-    metrics_v2Connection(variables?: Metrics_V2ConnectionQueryVariables, options?: C): Promise<{data: Metrics_V2ConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: Metrics_V2ConnectionQueryVariables, query: string}> {
-        return requester<{data: Metrics_V2ConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: Metrics_V2ConnectionQueryVariables, query: string}, Metrics_V2ConnectionQueryVariables>(Metrics_V2ConnectionDocument, variables, options);
+    metricsConnection(variables?: MetricsConnectionQueryVariables, options?: C): Promise<{data: MetricsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MetricsConnectionQueryVariables, query: string}> {
+        return requester<{data: MetricsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MetricsConnectionQueryVariables, query: string}, MetricsConnectionQueryVariables>(MetricsConnectionDocument, variables, options);
       },
     findings(variables: FindingsQueryVariables, options?: C): Promise<{data: FindingsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FindingsQueryVariables, query: string}> {
         return requester<{data: FindingsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FindingsQueryVariables, query: string}, FindingsQueryVariables>(FindingsDocument, variables, options);

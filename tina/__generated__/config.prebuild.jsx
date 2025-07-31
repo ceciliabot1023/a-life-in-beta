@@ -17,8 +17,8 @@ var config_default = defineConfig({
   schema: {
     collections: [
       {
-        name: "metrics_v2",
-        // Use underscore instead of dash
+        name: "metrics",
+        // Change back to original
         label: "Metrics",
         path: "content/metrics",
         format: "json",
