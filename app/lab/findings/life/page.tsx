@@ -9,17 +9,10 @@ import { ArrowLeft } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import client from '../../../../tina/__generated__/client'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
-
-interface Finding {
-  id: string;
-  title: string;
-  category: string;
-  date: string;
-  body: any | null; // Make it explicitly nullable
-}
+import type { TinaFinding } from '../../../../types/tina'
 
 export default function LifeFindingsPage() {
-  const [findings, setFindings] = useState<Finding[]>([])
+  const [findings, setFindings] = useState<TinaFinding[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -38,9 +31,9 @@ export default function LifeFindingsPage() {
           id: edge?.node?.id || '',
           title: edge?.node?.title || '',
           category: edge?.node?.category || '',
+          week: edge?.node?.week || '',
           date: edge?.node?.date || '',
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          body: edge?.node?.body as any  // Type assertion for TinaMarkdown compatibility
+          body: edge?.node?.body
         })).filter(f => f.id) || []
         
         setFindings(findingsData)

@@ -15,24 +15,15 @@ import { FindingsPanel } from '../components/sections/FindingsPanel'
 import { Navigation } from '../components/layout/Navigation'
 import client from '../../tina/__generated__/client'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
-
-interface App {
-  id: string
-  title: string
-  status: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  description: any  // TinaMarkdown requires 'any' type for rich-text content
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  body: any  // TinaMarkdown requires 'any' type for rich-text content
-}
+import type { TinaApp, TinaMarkdownContent } from '../../types/tina'
 
 export default function LabPage() {
   const [currentMockup, setCurrentMockup] = useState(0)
-  const [apps, setApps] = useState<App[]>([])
+  const [apps, setApps] = useState<TinaApp[]>([])
   const [loading, setLoading] = useState(true)
   
   // Function to extract images from app body content
-  const extractImagesFromBody = (body: any) => {
+  const extractImagesFromBody = (body: TinaMarkdownContent) => {
     if (!body) return []
     
     const images: { id: number, title: string, image: string, description: string }[] = []

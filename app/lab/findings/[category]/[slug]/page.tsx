@@ -10,15 +10,15 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import client from '../../../../../tina/__generated__/client'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
+import type { TinaMarkdownContent } from '../../../../../types/tina'
 
-interface Finding {
+interface FindingDetail {
   id: string
   title: string
   category: string
   week: string
   date: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  body: any | null  // TinaMarkdown requires 'any' type for rich-text content
+  body: TinaMarkdownContent | null
   _sys: {
     filename: string
     basename: string
@@ -30,7 +30,7 @@ interface Finding {
 
 export default function FindingDetailPage() {
   const params = useParams()
-  const [finding, setFinding] = useState<Finding | null>(null)
+  const [finding, setFinding] = useState<FindingDetail | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -48,8 +48,8 @@ export default function FindingDetailPage() {
           id: edge?.node?.id || '',
           title: edge?.node?.title || '',
           category: edge?.node?.category || '',
-          date: edge?.node?.date || '',
           week: edge?.node?.week || '',
+          date: edge?.node?.date || '',
           body: edge?.node?.body,
           _sys: {
             filename: edge?.node?._sys?.filename || '',

@@ -8,18 +8,11 @@ import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import client from '../../../../tina/__generated__/client'
-import { TinaMarkdown } from "tinacms/dist/rich-text";
-
-interface Finding {
-  id: string;
-  title: string;
-  category: string;
-  date: string;
-  body: any | null; // Make it explicitly nullable
-}
+import { TinaMarkdown } from "tinacms/dist/rich-text"
+import type { TinaFinding } from '../../../../types/tina'
 
 export default function WorkFindingsPage() {
-  const [findings, setFindings] = useState<Finding[]>([])
+  const [findings, setFindings] = useState<TinaFinding[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

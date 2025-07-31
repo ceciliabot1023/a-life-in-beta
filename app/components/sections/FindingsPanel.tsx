@@ -5,19 +5,10 @@ import Link from 'next/link'
 import { ArrowRight, Zap } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import client from '../../../tina/__generated__/client'
-
-interface Finding {
-  id: string
-  title: string
-  category: string
-  week: string
-  date: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  body: any  // TinaMarkdown requires 'any' type for rich-text content
-}
+import type { TinaFinding } from '../../../types/tina'
 
 export function FindingsPanel() {
-  const [findings, setFindings] = useState<Finding[]>([])
+  const [findings, setFindings] = useState<TinaFinding[]>([])
   const [loading, setLoading] = useState(true)
   
   useEffect(() => {
@@ -30,8 +21,7 @@ export function FindingsPanel() {
           category: edge?.node?.category || '',
           week: edge?.node?.week || '',
           date: edge?.node?.date || '',
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          body: edge?.node?.body as any
+          body: edge?.node?.body
         })) || []
         
         // Sort by date, most recent first
