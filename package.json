@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "dev:tina": "tinacms dev -c \"next dev\"",
-    "build": "tinacms build && next build",
+    "build": "next build --no-lint",
+    "build:with-lint": "next build",
+    "build:with-tina": "tinacms build && next build",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",

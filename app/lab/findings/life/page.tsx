@@ -90,7 +90,9 @@ export default function LifeFindingsPage() {
           <div className="space-y-8">
             {findings.map((finding, index) => {
               const slug = finding.title.toLowerCase().replace(/\s+/g, '-')
-              const bodyContent = finding.body ? <TinaMarkdown content={finding.body as any} /> : null;
+              const bodyContent = finding.body ? (
+                <TinaMarkdown content={finding.body} />
+              ) : null
               
               return (
                 <motion.div

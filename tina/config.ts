@@ -16,48 +16,42 @@ export default defineConfig({
   },
   schema: {
     collections: [
-      {
-        name: 'metrics',
-        label: 'Metrics',
-        path: 'content/metrics',
-        format: 'json',
-        fields: [
-          {
-            type: 'string',
-            name: 'category',
-            label: 'Category',
-            required: true,
-          },
-          {
-            type: 'string',
-            name: 'week',
-            label: 'Week',
-            required: true,
-          },
-          {
-            type: 'object',
-            name: 'data',
-            label: 'Data',
-            fields: [
-              {
-                type: 'number',
-                name: 'value',
-                label: 'Value',
-              },
-              {
-                type: 'string',
-                name: 'unit',
-                label: 'Unit',
-              },
-              {
-                type: 'string',
-                name: 'trend',
-                label: 'Trend',
-              },
-            ],
-          },
-        ],
-      },
+      // Temporarily comment out metrics collection to resolve schema mismatch
+      // {
+      //   name: 'metrics',
+      //   label: 'Metrics',
+      //   path: 'content/metrics',
+      //   format: 'json',
+      //   fields: [
+      //     {
+      //       type: 'string',
+      //       name: 'category',
+      //       label: 'Category',
+      //       required: true,
+      //     },
+      //     {
+      //       type: 'string',
+      //       name: 'week',
+      //       label: 'Week',
+      //       required: true,
+      //     },
+      //     {
+      //       type: 'number',
+      //       name: 'value',
+      //       label: 'Value',
+      //     },
+      //     {
+      //       type: 'string',
+      //       name: 'unit',
+      //       label: 'Unit',
+      //     },
+      //     {
+      //       type: 'string',
+      //       name: 'trend',
+      //       label: 'Trend',
+      //     },
+      //   ],
+      // },
       {
         name: 'findings',
         label: 'Findings',

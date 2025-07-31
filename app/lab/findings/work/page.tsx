@@ -55,11 +55,20 @@ export default function WorkFindingsPage() {
   }, [])
 
   if (loading) {
-    return <p>Loading findings...</p>;
+    return (
+      <div className="min-h-screen bg-cover bg-center bg-fixed" style={{backgroundImage: 'url(/images/lab-background.jpg)'}}>
+        <Navigation />
+        <main className="pt-20 pb-8">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="text-white text-center">Loading work findings...</div>
+          </div>
+        </main>
+      </div>
+    )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-cover bg-center bg-fixed" style={{backgroundImage: 'url(/images/lab-background.jpg)'}}>
       <Navigation />
       <main className="pt-20 pb-8">
         <div className="container mx-auto px-4 max-w-4xl">
@@ -82,7 +91,9 @@ export default function WorkFindingsPage() {
             {/* In the findings map section, wrap each finding with a Link: */}
             {findings.map((finding, index) => {
               const slug = finding.title.toLowerCase().replace(/\s+/g, '-')
-              const bodyContent = finding.body ? <TinaMarkdown content={finding.body as any} /> : null;
+              const bodyContent = finding.body ? (
+                <TinaMarkdown content={finding.body} />
+              ) : null
               
               return (
                 <motion.div
