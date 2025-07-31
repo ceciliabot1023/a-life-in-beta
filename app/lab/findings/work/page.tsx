@@ -8,15 +8,14 @@ import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import client from '../../../../tina/__generated__/client'
-import { TinaMarkdown } from 'tinacms/dist/rich-text'
+import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 interface Finding {
-  id: string
-  title: string
-  category: string
-  date: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  body: any  // TinaMarkdown requires 'any' type for rich-text content
+  id: string;
+  title: string;
+  category: string;
+  date: string;
+  body: any | null; // Make it explicitly nullable
 }
 
 export default function WorkFindingsPage() {
@@ -56,25 +55,11 @@ export default function WorkFindingsPage() {
   }, [])
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-cover bg-center bg-fixed" style={{backgroundImage: 'url(/images/lab-background.jpg)'}}>
-        <Navigation />
-        <main className="pt-20 pb-8">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <div className="text-white text-center">Loading work findings...</div>
-          </div>
-        </main>
-      </div>
-    )
-  }
-
-  const renderBody = (body: any) => {
-    if (!body) return null
-    return <TinaMarkdown content={body} />
+    return <p>Loading findings...</p>;
   }
 
   return (
-    <div className="min-h-screen bg-cover bg-center bg-fixed" style={{backgroundImage: 'url(/images/lab-background.jpg)'}}>
+    <div className="min-h-screen bg-gray-50">
       <Navigation />
       <main className="pt-20 pb-8">
         <div className="container mx-auto px-4 max-w-4xl">

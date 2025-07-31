@@ -11,12 +11,11 @@ import client from '../../../../tina/__generated__/client'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 
 interface Finding {
-  id: string
-  title: string
-  category: string
-  date: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  body: any  // TinaMarkdown requires 'any' type for rich-text content
+  id: string;
+  title: string;
+  category: string;
+  date: string;
+  body: any | null; // Make it explicitly nullable
 }
 
 export default function LifeFindingsPage() {
@@ -68,12 +67,6 @@ export default function LifeFindingsPage() {
     )
   }
 
-  // Add this helper function inside your component, before the return statement
-  const renderBody = (body: any) => {
-    if (!body) return null
-    return <TinaMarkdown content={body} />
-  }
-
   return (
     <div className="min-h-screen bg-cover bg-center bg-fixed" style={{backgroundImage: 'url(/images/lab-background.jpg)'}}>
       <Navigation />
@@ -115,7 +108,9 @@ export default function LifeFindingsPage() {
                       <div className="bg-white/5 p-4 rounded-lg border border-white/10">
                         <div className="text-white/70 text-sm leading-relaxed mb-2">
                           <div className="prose prose-invert prose-sm max-w-none prose-headings:text-white prose-headings:font-bold prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-p:mb-4 prose-p:leading-relaxed line-clamp-3">
-                            {renderBody(finding.body)}
+                            {finding.body != null && (
+                              <TinaMarkdown content={finding.body} />
+                            )}
                           </div>
                         </div>
                         <div className="text-white/40 text-xs">
