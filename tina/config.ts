@@ -5,7 +5,7 @@ import { defineConfig } from 'tinacms'
 export default defineConfig({
   apiURL: 
     process.env.NODE_ENV == "development" 
-      ? "http://localhost:9000/graphql" 
+      ? "http://localhost:4001/graphql" 
       : `https://content.tinajs.io/content/${process.env.NEXT_PUBLIC_TINA_CLIENT_ID}/github/${process.env.NEXT_PUBLIC_TINA_BRANCH}`,
   
   branch: 'main',
