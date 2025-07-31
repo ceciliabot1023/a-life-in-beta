@@ -107,7 +107,7 @@ export default function LabPage() {
             {/* Product/Service Incubator Section */}
             <div className="space-y-6">
               <h2 className="cyberpunk-title text-3xl font-bold text-white text-center mb-8">
-                Product/Service <span className="text-neon-red cyber-glow">Incubator</span>
+                <span className="text-neon-red cyber-glow">Incubator</span>
               </h2>
               
               {loading ? (
