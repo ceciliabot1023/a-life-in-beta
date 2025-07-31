@@ -139,7 +139,7 @@ export default function LabPage() {
                             <div className="space-y-4">
                               <h5 className="text-lg font-semibold text-cyan-400">The Concept</h5>
                               <div className="text-white/80 text-sm leading-relaxed prose prose-invert max-w-none">
-                                <TinaMarkdown content={app.description as any} />
+                                <TinaMarkdown content={app.description} />
                               </div>
                               <div className="flex flex-wrap gap-2">
                                 <span className={`px-3 py-1 border rounded-full text-xs ${
@@ -275,7 +275,7 @@ export default function LabPage() {
                           <div className="space-y-4">
                             <h5 className="text-lg font-semibold text-green-400">The Service</h5>
                             <div className="text-white/80 text-sm leading-relaxed prose prose-invert max-w-none">
-                              <TinaMarkdown content={app.description as any} />
+                              <TinaMarkdown content={app.body} />
                             </div>
                             <div className="flex flex-wrap gap-2">
                               <span className={`px-3 py-1 border rounded-full text-xs ${

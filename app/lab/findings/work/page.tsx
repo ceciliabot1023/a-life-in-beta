@@ -31,9 +31,9 @@ export default function WorkFindingsPage() {
           id: edge?.node?.id || '',
           title: edge?.node?.title || '',
           category: edge?.node?.category || '',
+          week: edge?.node?.week || '',
           date: edge?.node?.date || '',
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          body: edge?.node?.body as any  // Type assertion for TinaMarkdown compatibility
+          body: edge?.node?.body
         })).filter(f => f.id) || []
         
         setFindings(findingsData)
