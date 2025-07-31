@@ -7,9 +7,7 @@ var config_default = defineConfig({
   token: process.env.TINA_TOKEN,
   build: {
     outputFolder: "admin",
-    publicFolder: "public",
-    skipSchemaValidation: true
-    // Add this line
+    publicFolder: "public"
   },
   media: {
     tina: {
