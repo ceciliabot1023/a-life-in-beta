@@ -1,5 +1,5 @@
-query metrics($relativePath: String!) {
-  metrics(relativePath: $relativePath) {
+query metrics_v2($relativePath: String!) {
+  metrics_v2(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -12,12 +12,12 @@ query metrics($relativePath: String!) {
       }
       id
     }
-    ...MetricsParts
+    ...Metrics_v2Parts
   }
 }
 
-query metricsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: MetricsFilter) {
-  metricsConnection(
+query metrics_v2Connection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: Metrics_v2Filter) {
+  metrics_v2Connection(
     before: $before
     after: $after
     first: $first
@@ -47,7 +47,7 @@ query metricsConnection($before: String, $after: String, $first: Float, $last: F
           }
           id
         }
-        ...MetricsParts
+        ...Metrics_v2Parts
       }
     }
   }

@@ -1,4 +1,4 @@
-fragment MetricsParts on Metrics {
+fragment Metrics_v2Parts on Metrics_v2 {
   __typename
   category
   week

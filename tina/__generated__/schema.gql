@@ -54,8 +54,8 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
-  metrics(relativePath: String): Metrics!
-  metricsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: MetricsFilter): MetricsConnection!
+  metrics_v2(relativePath: String): Metrics_v2!
+  metrics_v2Connection(before: String, after: String, first: Float, last: Float, sort: String, filter: Metrics_v2Filter): Metrics_v2Connection!
   findings(relativePath: String): Findings!
   findingsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FindingsFilter): FindingsConnection!
   apps(relativePath: String): Apps!
@@ -63,7 +63,7 @@ type Query {
 }
 
 input DocumentFilter {
-  metrics: MetricsFilter
+  metrics_v2: Metrics_v2Filter
   findings: FindingsFilter
   apps: AppsFilter
 }
@@ -91,9 +91,9 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Metrics | Findings | Apps | Folder
+union DocumentNode = Metrics_v2 | Findings | Apps | Folder
 
-type Metrics implements Node & Document {
+type Metrics_v2 implements Node & Document {
   category: String!
   week: String!
   value: Float
@@ -121,7 +121,7 @@ input NumberFilter {
   in: [Float]
 }
 
-input MetricsFilter {
+input Metrics_v2Filter {
   category: StringFilter
   week: StringFilter
   value: NumberFilter
@@ -129,15 +129,15 @@ input MetricsFilter {
   trend: StringFilter
 }
 
-type MetricsConnectionEdges {
+type Metrics_v2ConnectionEdges {
   cursor: String!
-  node: Metrics
+  node: Metrics_v2
 }
 
-type MetricsConnection implements Connection {
+type Metrics_v2Connection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
-  edges: [MetricsConnectionEdges]
+  edges: [Metrics_v2ConnectionEdges]
 }
 
 type Findings implements Node & Document {
@@ -218,8 +218,8 @@ type Mutation {
   deleteDocument(collection: String, relativePath: String!): DocumentNode!
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   createFolder(collection: String, relativePath: String!): DocumentNode!
-  updateMetrics(relativePath: String!, params: MetricsMutation!): Metrics!
-  createMetrics(relativePath: String!, params: MetricsMutation!): Metrics!
+  updateMetrics_v2(relativePath: String!, params: Metrics_v2Mutation!): Metrics_v2!
+  createMetrics_v2(relativePath: String!, params: Metrics_v2Mutation!): Metrics_v2!
   updateFindings(relativePath: String!, params: FindingsMutation!): Findings!
   createFindings(relativePath: String!, params: FindingsMutation!): Findings!
   updateApps(relativePath: String!, params: AppsMutation!): Apps!
@@ -227,19 +227,19 @@ type Mutation {
 }
 
 input DocumentUpdateMutation {
-  metrics: MetricsMutation
+  metrics_v2: Metrics_v2Mutation
   findings: FindingsMutation
   apps: AppsMutation
   relativePath: String
 }
 
 input DocumentMutation {
-  metrics: MetricsMutation
+  metrics_v2: Metrics_v2Mutation
   findings: FindingsMutation
   apps: AppsMutation
 }
 
-input MetricsMutation {
+input Metrics_v2Mutation {
   category: String
   week: String
   value: Float
