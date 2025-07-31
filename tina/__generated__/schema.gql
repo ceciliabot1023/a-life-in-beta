@@ -54,6 +54,8 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
+  metrics(relativePath: String): Metrics!
+  metricsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: MetricsFilter): MetricsConnection!
   findings(relativePath: String): Findings!
   findingsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FindingsFilter): FindingsConnection!
   apps(relativePath: String): Apps!
@@ -61,6 +63,7 @@ type Query {
 }
 
 input DocumentFilter {
+  metrics: MetricsFilter
   findings: FindingsFilter
   apps: AppsFilter
 }
@@ -88,14 +91,14 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Findings | Apps | Folder
+union DocumentNode = Metrics | Findings | Apps | Folder
 
-type Findings implements Node & Document {
-  title: String!
+type Metrics implements Node & Document {
   category: String!
   week: String!
-  date: String!
-  body: JSON
+  value: Float
+  unit: String
+  trend: String
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -106,6 +109,46 @@ input StringFilter {
   eq: String
   exists: Boolean
   in: [String]
+}
+
+input NumberFilter {
+  lt: Float
+  lte: Float
+  gte: Float
+  gt: Float
+  eq: Float
+  exists: Boolean
+  in: [Float]
+}
+
+input MetricsFilter {
+  category: StringFilter
+  week: StringFilter
+  value: NumberFilter
+  unit: StringFilter
+  trend: StringFilter
+}
+
+type MetricsConnectionEdges {
+  cursor: String!
+  node: Metrics
+}
+
+type MetricsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [MetricsConnectionEdges]
+}
+
+type Findings implements Node & Document {
+  title: String!
+  category: String!
+  week: String!
+  date: String!
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
 }
 
 input DatetimeFilter {
@@ -175,6 +218,8 @@ type Mutation {
   deleteDocument(collection: String, relativePath: String!): DocumentNode!
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   createFolder(collection: String, relativePath: String!): DocumentNode!
+  updateMetrics(relativePath: String!, params: MetricsMutation!): Metrics!
+  createMetrics(relativePath: String!, params: MetricsMutation!): Metrics!
   updateFindings(relativePath: String!, params: FindingsMutation!): Findings!
   createFindings(relativePath: String!, params: FindingsMutation!): Findings!
   updateApps(relativePath: String!, params: AppsMutation!): Apps!
@@ -182,14 +227,24 @@ type Mutation {
 }
 
 input DocumentUpdateMutation {
+  metrics: MetricsMutation
   findings: FindingsMutation
   apps: AppsMutation
   relativePath: String
 }
 
 input DocumentMutation {
+  metrics: MetricsMutation
   findings: FindingsMutation
   apps: AppsMutation
+}
+
+input MetricsMutation {
+  category: String
+  week: String
+  value: Float
+  unit: String
+  trend: String
 }
 
 input FindingsMutation {

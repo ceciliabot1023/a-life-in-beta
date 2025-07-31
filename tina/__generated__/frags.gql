@@ -1,3 +1,12 @@
+fragment MetricsParts on Metrics {
+  __typename
+  category
+  week
+  value
+  unit
+  trend
+}
+
 fragment FindingsParts on Findings {
   __typename
   title

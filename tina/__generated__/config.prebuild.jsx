@@ -16,42 +16,41 @@ var config_default = defineConfig({
   },
   schema: {
     collections: [
-      // Temporarily comment out metrics collection to resolve schema mismatch
-      // {
-      //   name: 'metrics',
-      //   label: 'Metrics',
-      //   path: 'content/metrics',
-      //   format: 'json',
-      //   fields: [
-      //     {
-      //       type: 'string',
-      //       name: 'category',
-      //       label: 'Category',
-      //       required: true,
-      //     },
-      //     {
-      //       type: 'string',
-      //       name: 'week',
-      //       label: 'Week',
-      //       required: true,
-      //     },
-      //     {
-      //       type: 'number',
-      //       name: 'value',
-      //       label: 'Value',
-      //     },
-      //     {
-      //       type: 'string',
-      //       name: 'unit',
-      //       label: 'Unit',
-      //     },
-      //     {
-      //       type: 'string',
-      //       name: 'trend',
-      //       label: 'Trend',
-      //     },
-      //   ],
-      // },
+      {
+        name: "metrics",
+        label: "Metrics",
+        path: "content/metrics",
+        format: "json",
+        fields: [
+          {
+            type: "string",
+            name: "category",
+            label: "Category",
+            required: true
+          },
+          {
+            type: "string",
+            name: "week",
+            label: "Week",
+            required: true
+          },
+          {
+            type: "number",
+            name: "value",
+            label: "Value"
+          },
+          {
+            type: "string",
+            name: "unit",
+            label: "Unit"
+          },
+          {
+            type: "string",
+            name: "trend",
+            label: "Trend"
+          }
+        ]
+      },
       {
         name: "findings",
         label: "Findings",
