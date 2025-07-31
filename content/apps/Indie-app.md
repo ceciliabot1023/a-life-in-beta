@@ -28,6 +28,10 @@ description: >
   Join the waitlist for your exclusive invitation.
 ---
 
-![](/images/Indie%20app/screen1.png)![](/images/Indie%20app/screen2.png)
+![Vase App Screen 1](/images/Indie%20app/screen1.png)
 
-![](</images/Indie app/screen 3 .png>)
+![Vase App Screen 2](/images/Indie%20app/screen2.png)
+
+![Vase App Screen 3](/images/Indie%20app/screen%203.png)
+
+![Vase App Screen 4](/images/Indie%20app/screen4.png)
