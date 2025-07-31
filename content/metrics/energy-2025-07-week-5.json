@@ -1,9 +1,0 @@
-{
-  "category": "energy",
-  "week": "2025-07-week-5",
-  "data": {
-    "value": 5,
-    "unit": "scale 1-10",
-    "trend": "down"
-  }
-}
