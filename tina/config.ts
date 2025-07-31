@@ -3,7 +3,7 @@ import { defineConfig } from 'tinacms'
 // Force re-index: 2025-07-31T16:30:00Z
 
 export default defineConfig({
-  apiURL: 
+  contentApiUrlOverride: 
     process.env.NODE_ENV == "development" 
       ? "http://localhost:4001/graphql" 
       : `https://content.tinajs.io/content/${process.env.NEXT_PUBLIC_TINA_CLIENT_ID}/github/${process.env.NEXT_PUBLIC_TINA_BRANCH}`,
