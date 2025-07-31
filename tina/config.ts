@@ -1,5 +1,6 @@
 import { defineConfig } from 'tinacms'
 
+// Force re-index: 2025-07-31T16:30:00Z
 export default defineConfig({
   branch: 'main',
   clientId: process.env.TINA_CLIENT_ID || process.env.NEXT_PUBLIC_TINA_CLIENT_ID || '',
