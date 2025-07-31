@@ -28,9 +28,9 @@ export function StatusPanel() {
           category: edge?.node?.category || '',
           week: edge?.node?.week || '',
           data: {
-            value: edge?.node?.value ?? 0,
-            unit: edge?.node?.unit ?? '',
-            trend: edge?.node?.trend ?? ''
+            value: edge?.node?.data?.value ?? 0,
+            unit: edge?.node?.data?.unit ?? '',
+            trend: edge?.node?.data?.trend ?? ''
           }
         })) || []
         

@@ -21,7 +21,6 @@ var config_default = defineConfig({
     collections: [
       {
         name: "metrics",
-        // Change back to original
         label: "Metrics",
         path: "content/metrics",
         format: "json",
@@ -39,19 +38,26 @@ var config_default = defineConfig({
             required: true
           },
           {
-            type: "number",
-            name: "value",
-            label: "Value"
-          },
-          {
-            type: "string",
-            name: "unit",
-            label: "Unit"
-          },
-          {
-            type: "string",
-            name: "trend",
-            label: "Trend"
+            type: "object",
+            name: "data",
+            label: "Data",
+            fields: [
+              {
+                type: "number",
+                name: "value",
+                label: "Value"
+              },
+              {
+                type: "string",
+                name: "unit",
+                label: "Unit"
+              },
+              {
+                type: "string",
+                name: "trend",
+                label: "Trend"
+              }
+            ]
           }
         ]
       },

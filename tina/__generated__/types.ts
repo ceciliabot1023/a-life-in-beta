@@ -201,13 +201,18 @@ export type CollectionDocumentsArgs = {
 
 export type DocumentNode = Metrics | Findings | Apps | Folder;
 
+export type MetricsData = {
+  __typename?: 'MetricsData';
+  value?: Maybe<Scalars['Float']['output']>;
+  unit?: Maybe<Scalars['String']['output']>;
+  trend?: Maybe<Scalars['String']['output']>;
+};
+
 export type Metrics = Node & Document & {
   __typename?: 'Metrics';
   category: Scalars['String']['output'];
   week: Scalars['String']['output'];
-  value?: Maybe<Scalars['Float']['output']>;
-  unit?: Maybe<Scalars['String']['output']>;
-  trend?: Maybe<Scalars['String']['output']>;
+  data?: Maybe<MetricsData>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -230,12 +235,16 @@ export type NumberFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
 };
 
-export type MetricsFilter = {
-  category?: InputMaybe<StringFilter>;
-  week?: InputMaybe<StringFilter>;
+export type MetricsDataFilter = {
   value?: InputMaybe<NumberFilter>;
   unit?: InputMaybe<StringFilter>;
   trend?: InputMaybe<StringFilter>;
+};
+
+export type MetricsFilter = {
+  category?: InputMaybe<StringFilter>;
+  week?: InputMaybe<StringFilter>;
+  data?: InputMaybe<MetricsDataFilter>;
 };
 
 export type MetricsConnectionEdges = {
@@ -426,12 +435,16 @@ export type DocumentMutation = {
   apps?: InputMaybe<AppsMutation>;
 };
 
-export type MetricsMutation = {
-  category?: InputMaybe<Scalars['String']['input']>;
-  week?: InputMaybe<Scalars['String']['input']>;
+export type MetricsDataMutation = {
   value?: InputMaybe<Scalars['Float']['input']>;
   unit?: InputMaybe<Scalars['String']['input']>;
   trend?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MetricsMutation = {
+  category?: InputMaybe<Scalars['String']['input']>;
+  week?: InputMaybe<Scalars['String']['input']>;
+  data?: InputMaybe<MetricsDataMutation>;
 };
 
 export type FindingsMutation = {
@@ -449,7 +462,7 @@ export type AppsMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type MetricsPartsFragment = { __typename: 'Metrics', category: string, week: string, value?: number | null, unit?: string | null, trend?: string | null };
+export type MetricsPartsFragment = { __typename: 'Metrics', category: string, week: string, data?: { __typename: 'MetricsData', value?: number | null, unit?: string | null, trend?: string | null } | null };
 
 export type FindingsPartsFragment = { __typename: 'Findings', title: string, category: string, week: string, date: string, body?: any | null };
 
@@ -460,7 +473,7 @@ export type MetricsQueryVariables = Exact<{
 }>;
 
 
-export type MetricsQuery = { __typename?: 'Query', metrics: { __typename: 'Metrics', id: string, category: string, week: string, value?: number | null, unit?: string | null, trend?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type MetricsQuery = { __typename?: 'Query', metrics: { __typename: 'Metrics', id: string, category: string, week: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data?: { __typename: 'MetricsData', value?: number | null, unit?: string | null, trend?: string | null } | null } };
 
 export type MetricsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -472,7 +485,7 @@ export type MetricsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type MetricsConnectionQuery = { __typename?: 'Query', metricsConnection: { __typename?: 'MetricsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'MetricsConnectionEdges', cursor: string, node?: { __typename: 'Metrics', id: string, category: string, week: string, value?: number | null, unit?: string | null, trend?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type MetricsConnectionQuery = { __typename?: 'Query', metricsConnection: { __typename?: 'MetricsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'MetricsConnectionEdges', cursor: string, node?: { __typename: 'Metrics', id: string, category: string, week: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data?: { __typename: 'MetricsData', value?: number | null, unit?: string | null, trend?: string | null } | null } | null } | null> | null } };
 
 export type FindingsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -517,9 +530,12 @@ export const MetricsPartsFragmentDoc = gql`
   __typename
   category
   week
-  value
-  unit
-  trend
+  data {
+    __typename
+    value
+    unit
+    trend
+  }
 }
     `;
 export const FindingsPartsFragmentDoc = gql`

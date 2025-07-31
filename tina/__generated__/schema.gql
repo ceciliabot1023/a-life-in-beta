@@ -93,12 +93,16 @@ type Collection {
 
 union DocumentNode = Metrics | Findings | Apps | Folder
 
-type Metrics implements Node & Document {
-  category: String!
-  week: String!
+type MetricsData {
   value: Float
   unit: String
   trend: String
+}
+
+type Metrics implements Node & Document {
+  category: String!
+  week: String!
+  data: MetricsData
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -121,12 +125,16 @@ input NumberFilter {
   in: [Float]
 }
 
-input MetricsFilter {
-  category: StringFilter
-  week: StringFilter
+input MetricsDataFilter {
   value: NumberFilter
   unit: StringFilter
   trend: StringFilter
+}
+
+input MetricsFilter {
+  category: StringFilter
+  week: StringFilter
+  data: MetricsDataFilter
 }
 
 type MetricsConnectionEdges {
@@ -239,12 +247,16 @@ input DocumentMutation {
   apps: AppsMutation
 }
 
-input MetricsMutation {
-  category: String
-  week: String
+input MetricsDataMutation {
   value: Float
   unit: String
   trend: String
+}
+
+input MetricsMutation {
+  category: String
+  week: String
+  data: MetricsDataMutation
 }
 
 input FindingsMutation {
