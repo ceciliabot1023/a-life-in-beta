@@ -68,6 +68,11 @@ export default function WorkFindingsPage() {
     )
   }
 
+  const renderBody = (body: any) => {
+    if (!body) return null
+    return <TinaMarkdown content={body} />
+  }
+
   return (
     <div className="min-h-screen bg-cover bg-center bg-fixed" style={{backgroundImage: 'url(/images/lab-background.jpg)'}}>
       <Navigation />
@@ -90,7 +95,7 @@ export default function WorkFindingsPage() {
           
           <div className="space-y-8">
             {/* In the findings map section, wrap each finding with a Link: */}
-            {findings.map((finding) => {
+            {findings.map((finding, index) => {
               const slug = finding.title.toLowerCase().replace(/\s+/g, '-')
               
               return (
@@ -110,9 +115,7 @@ export default function WorkFindingsPage() {
                       <div className="bg-white/5 p-4 rounded-lg border border-white/10">
                         <div className="text-white/70 text-sm leading-relaxed mb-2">
                           <div className="prose prose-invert prose-sm max-w-none prose-headings:text-white prose-headings:font-bold prose-h1:text-xl prose-h2:text-lg prose-h3:text-base prose-p:mb-4 prose-p:leading-relaxed prose-p:text-white/70 prose-strong:text-white prose-li:text-white/70 line-clamp-3">
-                            {finding.body && (
-                              <TinaMarkdown content={finding.body as any} />
-                            )}
+                            {renderBody(finding.body)}
                           </div>
                         </div>
                         <div className="text-white/40 text-xs">
