@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "tinacms dev -c \"next dev\"",
     "dev:tina": "tinacms dev -c \"next dev\"",
-    "build": "next build --no-lint",
+    "build": "tinacms build && next build",
     "build:with-lint": "tinacms build && next build",
     "build:with-tina": "tinacms build && next build",
     "start": "next start",
