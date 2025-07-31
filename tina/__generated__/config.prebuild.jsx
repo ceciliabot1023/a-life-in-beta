@@ -1,7 +1,7 @@
 // tina/config.ts
 import { defineConfig } from "tinacms";
 var config_default = defineConfig({
-  contentApiUrlOverride: true ? "http://localhost:4001/graphql" : `https://content.tinajs.io/content/${process.env.NEXT_PUBLIC_TINA_CLIENT_ID}/github/${process.env.NEXT_PUBLIC_TINA_BRANCH}`,
+  contentApiUrlOverride: true ? "http://localhost:4001/graphql" : `https://content.tinajs.io/content/${process.env.NEXT_PUBLIC_TINA_CLIENT_ID}/github/${process.env.TINA_BRANCH}`,
   branch: "main",
   clientId: process.env.TINA_CLIENT_ID || process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
   token: process.env.TINA_TOKEN,
