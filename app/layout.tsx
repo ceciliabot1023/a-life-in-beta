@@ -16,6 +16,8 @@ export const metadata: Metadata = {
   },
 }
 
+import { Analytics } from '@vercel/analytics/react'
+
 export default function RootLayout({
   children,
 }: {
@@ -23,8 +25,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className} suppressHydrationWarning={true}>
+      <body>
         {children}
+        <Analytics />
       </body>
     </html>
   )
