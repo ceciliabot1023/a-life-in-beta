@@ -4,9 +4,9 @@ import { defineConfig } from 'tinacms'
 
 export default defineConfig({
   contentApiUrlOverride: 
-    process.env.NODE_ENV == "development" 
+    process.env.NODE_ENV === "development" 
       ? "http://localhost:4001/graphql" 
-      : `https://content.tinajs.io/1.6/content/${process.env.TINA_CLIENT_ID || process.env.NEXT_PUBLIC_TINA_CLIENT_ID}/github/${process.env.TINA_BRANCH}`,
+      : undefined, // Let it use TinaCloud in production
   
   branch: 'main',
   clientId: process.env.TINA_CLIENT_ID || process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
