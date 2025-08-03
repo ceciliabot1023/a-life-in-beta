@@ -45,6 +45,11 @@ export default function LabPage() {
           })
         }
         
+        // Handle paragraph with image content
+        if (obj.type === 'p' && obj.children) {
+          findImages(obj.children)
+        }
+        
         // Handle markdown image text content
         if (obj.type === 'text' && typeof obj.text === 'string') {
           const markdownImageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g
@@ -59,6 +64,18 @@ export default function LabPage() {
           }
         }
         
+        // Handle direct image nodes
+        if (obj.type === 'image' || obj.type === 'mdxJsxFlowElement') {
+          if (obj.url || obj.src) {
+            images.push({
+              id: images.length + 1,
+              title: (obj.alt as string) || 'App Screenshot',
+              image: (obj.url || obj.src) as string,
+              description: (obj.alt as string) || 'Application interface'
+            })
+          }
+        }
+        
         // Recursively search in children
         if (obj.children) {
           findImages(obj.children)
@@ -67,6 +84,22 @@ export default function LabPage() {
     }
     
     findImages(body)
+    
+    // If no images found through rich-text parsing, try to extract from raw markdown
+    if (images.length === 0 && body) {
+      const bodyString = JSON.stringify(body)
+      const markdownImageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g
+      let match
+      while ((match = markdownImageRegex.exec(bodyString)) !== null) {
+        images.push({
+          id: images.length + 1,
+          title: match[1] || 'App Screenshot',
+          image: match[2],
+          description: match[1] || 'Application interface'
+        })
+      }
+    }
+    
     return images
   }
 
@@ -139,7 +172,11 @@ export default function LabPage() {
                     <h3 className="cyberpunk-title text-2xl font-bold text-white mb-4">
                       <span className="text-neon-cyan cyber-glow">Indie App</span>
                     </h3>
-                    {apps.filter(app => app.title.toLowerCase().includes('app') || app.status === 'development').map((app) => (
+                    {apps.filter(app => 
+                      app.title.toLowerCase().includes('app') || 
+                      app.status === 'development' || 
+                      app.title.toLowerCase().includes('vase')
+                    ).map((app) => (
                       <div key={app.id} className="glass-panel">
                         <div className="p-6">
                           <div className="flex items-center gap-3 mb-6">
