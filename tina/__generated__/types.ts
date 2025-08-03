@@ -311,7 +311,7 @@ export type Apps = Node & Document & {
   __typename?: 'Apps';
   title: Scalars['String']['output'];
   status?: Maybe<Scalars['String']['output']>;
-  description?: Maybe<Scalars['JSON']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
   body?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -321,7 +321,7 @@ export type Apps = Node & Document & {
 export type AppsFilter = {
   title?: InputMaybe<StringFilter>;
   status?: InputMaybe<StringFilter>;
-  description?: InputMaybe<RichTextFilter>;
+  description?: InputMaybe<StringFilter>;
   body?: InputMaybe<RichTextFilter>;
 };
 
@@ -458,7 +458,7 @@ export type FindingsMutation = {
 export type AppsMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<Scalars['String']['input']>;
-  description?: InputMaybe<Scalars['JSON']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
@@ -466,7 +466,7 @@ export type MetricsPartsFragment = { __typename: 'Metrics', category: string, we
 
 export type FindingsPartsFragment = { __typename: 'Findings', title: string, category: string, week: string, date: string, body?: any | null };
 
-export type AppsPartsFragment = { __typename: 'Apps', title: string, status?: string | null, description?: any | null, body?: any | null };
+export type AppsPartsFragment = { __typename: 'Apps', title: string, status?: string | null, description?: string | null, body?: any | null };
 
 export type MetricsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -511,7 +511,7 @@ export type AppsQueryVariables = Exact<{
 }>;
 
 
-export type AppsQuery = { __typename?: 'Query', apps: { __typename: 'Apps', id: string, title: string, status?: string | null, description?: any | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type AppsQuery = { __typename?: 'Query', apps: { __typename: 'Apps', id: string, title: string, status?: string | null, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type AppsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -523,7 +523,7 @@ export type AppsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type AppsConnectionQuery = { __typename?: 'Query', appsConnection: { __typename?: 'AppsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AppsConnectionEdges', cursor: string, node?: { __typename: 'Apps', id: string, title: string, status?: string | null, description?: any | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type AppsConnectionQuery = { __typename?: 'Query', appsConnection: { __typename?: 'AppsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AppsConnectionEdges', cursor: string, node?: { __typename: 'Apps', id: string, title: string, status?: string | null, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export const MetricsPartsFragmentDoc = gql`
     fragment MetricsParts on Metrics {
@@ -796,7 +796,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/1.6/content/undefined/github/undefined",
+        url: "https://content.tinajs.io/1.6/content/190b6b72-2fd9-47d2-801b-43c84175955b/github/main",
         queries,
       })
     )

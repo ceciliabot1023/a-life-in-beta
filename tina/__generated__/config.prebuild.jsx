@@ -119,9 +119,14 @@ var config_default = defineConfig({
             options: ["concept", "development", "testing", "launched"]
           },
           {
-            type: "rich-text",
+            type: "string",
+            // ← Change from 'rich-text' to 'string'
             name: "description",
-            label: "Description"
+            label: "Description",
+            ui: {
+              component: "textarea"
+              // Allow multi-line text
+            }
           },
           {
             type: "rich-text",

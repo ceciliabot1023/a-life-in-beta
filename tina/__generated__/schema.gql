@@ -195,7 +195,7 @@ type FindingsConnection implements Connection {
 type Apps implements Node & Document {
   title: String!
   status: String
-  description: JSON
+  description: String
   body: JSON
   id: ID!
   _sys: SystemInfo!
@@ -205,7 +205,7 @@ type Apps implements Node & Document {
 input AppsFilter {
   title: StringFilter
   status: StringFilter
-  description: RichTextFilter
+  description: StringFilter
   body: RichTextFilter
 }
 
@@ -270,7 +270,7 @@ input FindingsMutation {
 input AppsMutation {
   title: String
   status: String
-  description: JSON
+  description: String
   body: JSON
 }
 

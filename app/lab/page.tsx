@@ -34,6 +34,8 @@ export default function LabPage() {
         content.forEach(findImages)
       } else if (content && typeof content === 'object') {
         const obj = content as Record<string, unknown>
+        
+        // Handle rich-text image objects
         if (obj.type === 'img' && obj.url) {
           images.push({
             id: images.length + 1,
@@ -41,6 +43,20 @@ export default function LabPage() {
             image: obj.url as string,
             description: (obj.caption as string) || 'Application interface'
           })
+        }
+        
+        // Handle markdown image text content
+        if (obj.type === 'text' && typeof obj.text === 'string') {
+          const markdownImageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g
+          let match
+          while ((match = markdownImageRegex.exec(obj.text)) !== null) {
+            images.push({
+              id: images.length + 1,
+              title: match[1] || 'App Screenshot',
+              image: match[2],
+              description: match[1] || 'Application interface'
+            })
+          }
         }
         
         // Recursively search in children
