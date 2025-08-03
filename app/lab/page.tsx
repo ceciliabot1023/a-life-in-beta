@@ -22,29 +22,14 @@ export default function LabPage() {
   const [apps, setApps] = useState<TinaApp[]>([])
   const [loading, setLoading] = useState(true)
   
-  // Function to extract images from app body content with fallback for Vase app
+  // Function to extract images from app body content
   const extractImagesFromBody = (body: TinaMarkdownContent) => {
     if (!body) return []
     
     const images: { id: number, title: string, image: string, description: string }[] = []
     
-    // For Vase app, use known working image paths
-    const vaseImages = [
-      { id: 1, title: 'Vase App Screen 1', image: '/images/Indie app/screen1.png', description: 'Vase App Screenshot 1' },
-      { id: 2, title: 'Vase App Screen 2', image: '/images/Indie app/screen2.png', description: 'Vase App Screenshot 2' },
-      { id: 3, title: 'Vase App Screen 3', image: '/images/Indie app/screen 3 .png', description: 'Vase App Screenshot 3' },
-      { id: 4, title: 'Vase App Screen 4', image: '/images/Indie app/screen4.png', description: 'Vase App Screenshot 4' }
-    ]
-    
-    // Convert entire body to string and check if it contains Vase app images
+    // Convert entire body to string and extract images from markdown
     const bodyString = JSON.stringify(body)
-    
-    // If this looks like the Vase app content, return the hardcoded images
-    if (bodyString.includes('Vase App Screen') || bodyString.includes('screen1.png')) {
-      return vaseImages
-    }
-    
-    // Otherwise, try to extract images from markdown
     const markdownImageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g
     let match
     
