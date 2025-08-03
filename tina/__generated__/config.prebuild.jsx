@@ -3,8 +3,8 @@ import { defineConfig } from "tinacms";
 var config_default = defineConfig({
   contentApiUrlOverride: true ? "http://localhost:4001/graphql" : void 0,
   // Let it use TinaCloud in production
-  branch: process.env.NEXT_PUBLIC_TINA_BRANCH || "main",
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
+  branch: "main",
+  clientId: process.env.TINA_CLIENT_ID || process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
   token: process.env.TINA_TOKEN,
   build: {
     outputFolder: "admin",
