@@ -16,6 +16,6 @@ export interface TinaApp {
   id: string
   title: string
   status: string
-  description: TinaMarkdownContent
+  description: string // Changed from TinaMarkdownContent to string to match schema
   body: TinaMarkdownContent
 }

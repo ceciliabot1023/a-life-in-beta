@@ -154,8 +154,8 @@ export default function LabPage() {
                             {/* App Description */}
                             <div className="space-y-4">
                               <h5 className="text-lg font-semibold text-cyan-400">The Concept</h5>
-                              <div className="text-white/80 text-sm leading-relaxed prose prose-invert max-w-none">
-                                <TinaMarkdown content={app.description} />
+                              <div className="text-white/80 text-sm leading-relaxed whitespace-pre-line">
+                                {app.description}
                               </div>
                               <div className="flex flex-wrap gap-2">
                                 <span className={`px-3 py-1 border rounded-full text-xs ${
