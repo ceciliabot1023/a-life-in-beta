@@ -1,9 +1,15 @@
 ---
-title: Heart beat
+title: Sunburn
 category: LIFE
 week: 2025-08-week-1
 date: 2025-08-02T16:00:00.000Z
 ---
+
+Swallowed by storm. Hold my breath. Run away from this mess. Look to the light instead.
+
+***
+
+# **Moments**
 
 旅居的第0天，所有计划因为一场台风被刮得飞乱。
 
