@@ -5,55 +5,46 @@ week: 2025-07-week-3
 date: 2025-07-13T16:00:00.000Z
 ---
 
+> *These are a few clips of my "prep" weeks. They're only here as placeholders for the incoming contents.
+> I used \~2 months to relax, reset, and rethink how I want to spend my days in a new journey.
+> I decided to utilize key components of my top strengths (identified through Gallup's CliftonStrengths Talent assessment) to organize my weekly work findings, as this aligns with how I‘d like to work, level up my strengths, and continually iterate through INPUT, LEARN, and ACHIEVE.*
 
+***
 
-
-
-> *These are a few clips of my "prep" weeks. They're only here as placeholders for the incoming contents. 
-I used ~2 months to relax, reset, and rethink how I want to spend my days in a new journey. 
-I decided to utilize key components of my top strengths (identified through Gallup's CliftonStrengths Talent assessment) to organize my weekly work findings, as this aligns with how I‘d like to work, level up my strengths, and continually iterate through INPUT, LEARN, and ACHIEVE.*
-
----
-
-As I publish this now, I realize how meaningful it is to me to live, record, and share in the moment.  That's exactly why I'm doing this. 
+As I publish this now, I realize how meaningful it is to me to live, record, and share in the moment.  That's exactly why I'm doing this.
 **I want to be a live recorder of this transformative time in my life, rather than looking back and trying to piece together a story of success or failure in a different mind and energy status.**
 
----
+***
 
 # **INPUT**
 
 ### For @投资小白
 
 1. 稳定收益选红利股。
-
 2. 区分“投机”和“投资”，前者靠热点和信息差，后者靠价值判断。
-
 3. 炒股就两个问题：什么时候买入，什么时候卖出。“买入”时机是决定性的，比“卖出”时机更重要。
-
 4. 不要盲目追高，不要加杠杆。
-
 5. 选择自己相对熟悉的领域，注意信息来源，不要轻信他人推荐。
-
 6. 心态比策略更重要，控制好自己的冲动/闲不住的手很关键。能战胜市场情绪的只有极致的理性。
 
----
+***
 
 ### For @life coach/自我探索者
 
 > （credit to "内生动力" 教练机构）
 
 1. 第一课，也是终极的一课吧：Having, Being, Doing
-   *教练的核心心法：先‘拥有’(Having)，再‘成为’(Being)，最后‘行动’(Doing)。
-   *简单说：先敢想象‘我配得上理想生活’，再活出那个状态，行动自然发生！
+   教练的核心心法：先‘拥有’(Having)，再‘成为’(Being)，最后‘行动’(Doing)。
+   简单说：先敢想象‘我配得上理想生活’，再活出那个状态，行动自然发生！
 2. 人生脚本：
-   *你的一生可能都在被一个\<默认脚本>支配，循环往复。以我为例，我的脚本是：得到、失去、在起点找到生活的真谛（只想要简单的爱和生活）。
-   *人生如戏，每一段痛苦的关系中总有“受害者”、“迫害者”、“拯救者”，“出戏”的关键在于能意识到是自己在演哪个角色、谁在导演这场戏，“入戏”太深的时候可以试着喊一声“咔”，或者换对手戏演演。
+   你的一生可能都在被一个\<默认脚本>支配，循环往复。以我为例，我的脚本是：得到、失去、在起点找到生活的真谛（只想要简单的爱和生活）。
+   人生如戏，每一段痛苦的关系中总有“受害者”、“迫害者”、“拯救者”，“出戏”的关键在于能意识到是自己在演哪个角色、谁在导演这场戏，“入戏”太深的时候可以试着喊一声“咔”，或者换对手戏演演。
 3. 金钱观
-   *意识到自己底层没那么焦虑的一个信念是 “缺钱的时候钱就会来”。
-   *有卡点的朋友可以跟我做一下“金钱关系冥想”，快速有效！
-5. 还有两节因为爬山翘课了🤷
+   意识到自己底层没那么焦虑的一个信念是 “缺钱的时候钱就会来”。
+   有卡点的朋友可以跟我做一下“金钱关系冥想”，快速有效！
+4. 还有两节因为爬山翘课了🤷
 
----
+***
 
 # **LEARN**
 
@@ -77,7 +68,7 @@ As I publish this now, I realize how meaningful it is to me to live, record, and
 
 我变了，变得既要工作中的极致，也要生活的平衡。甚至，变成了一个懂得为自己幸福和快乐工作的人。而这一切的开始，就是允许自己，从“越闲越焦虑”的怪圈里走出来，真正拥抱“无所事事”的自由，相信科学地“好好休息”。因为，高质量的休息，才是我们这个时代最高级的生产力！ 敢于给人生做减法，你会邂逅一个更松弛，也更强大的自己。✨
 
----
+***
 
 ### 回头看，为什么能在字节呆那么久？
 
@@ -95,25 +86,22 @@ As I publish this now, I realize how meaningful it is to me to live, record, and
 
 所以，别让工作单方面‘透支’你，主动跟生活‘算笔账’，用微小的行动拿回掌控感，你会发现自己远比想象中强大，生活也能被我们‘经营’得有声有色！
 
----
+***
 
 # **ACHIEVE**
 
 Learning to celebrate every milestone along the way!
 
 1. My Podcast hit 2K+ followers and published the first paid episode.
-
 2. Xxx stock market returns without any prior knowledge/experience.
-
 3. Overcome my inner struggle of multi-identity issues and self-expression in social media, and published in the Rednote/Bilibili.
-
 4. Completed the overall product plan, MVP PRD, and design of my first app product.
-
 5. Clarified my belief system, what I value most, what my ideal life looks like, what my long-term and short-term goals are, structured V0 of my career and life transition roadmap.
 
 #### 播客制作提效总结
 
 **Shownotes 生成**
+
 ```
 #目标
 为播客节目撰写一期提纲，围绕[话题]，希望能xxxx。
@@ -138,65 +126,70 @@ Learning to celebrate every milestone along the way!
 #### 播客音频to公众号文章
 
 **1. 文章生成**
+
 ```
 请根据附件中的播客音频转写稿，生成一篇适合在微信公众号发布的文章。要求：
-* 重新梳理内容逻辑，符合公众号阅读习惯
-* 保留原播客的核心观点和精彩内容
-* 语言风格轻松幽默但不失深度
-* 分段清晰，增加小标题
-* 总字数控制在2000-3000字之间
+重新梳理内容逻辑，符合公众号阅读习惯
+保留原播客的核心观点和精彩内容
+语言风格轻松幽默但不失深度
+分段清晰，增加小标题
+总字数控制在2000-3000字之间
 播客转写稿：
 [在此处粘贴您的播客转写稿]
 ```
 
 **2. 标题生成**
+
 ```
 请根据以下文章内容，生成5个适合微信公众号的标题。要求：
-* 能引发读者兴趣
-* 符合微信平台推荐算法热门趋势
-* 便于SEO获得更多曝光
-* 反映文章核心内容
-* 风格轻松幽默但不失深度
+能引发读者兴趣
+符合微信平台推荐算法热门趋势
+便于SEO获得更多曝光
+反映文章核心内容
+风格轻松幽默但不失深度
 文章内容：
 [在此处粘贴步骤1生成的文字总结]
 ```
 
 **3. 封面图生成**
+
 ```
 请根据以下文章内容和标题，生成用于Midjourney的封面图提示词。要求：
-* 风格：举例（莫奈画作、自然、呼吸感、加入光影效果）
-* 符合极简、现代、Z世代审美
-* 颜色：莫兰迪色系，蓝色、紫色、绿色
-* 提示词需包含具体的视觉元素描述
-* 分别生成首图(900*383px)和次图(383*383px)的提示词
+风格：举例（莫奈画作、自然、呼吸感、加入光影效果）
+符合极简、现代、Z世代审美
+颜色：莫兰迪色系，蓝色、紫色、绿色
+提示词需包含具体的视觉元素描述
+分别生成首图(900*383px)和次图(383*383px)的提示词
 
 文章标题：[在此处粘贴步骤5选定的标题]
 文章内容：[在此处粘贴步骤1生成的文字总结摘要]
 ```
 
 **4. 文章to幻灯片文字**
+
 ```
 请根据以下文章内容，生成10-15张幻灯片的文字内容。要求：
-*每张幻灯片紧贴原播客内容
-*文字简洁、亲切、轻松幽默
-*每张幻灯片有明确的主题
-*适合视觉化呈现
-*包含标题和正文内容
+每张幻灯片紧贴原播客内容
+文字简洁、亲切、轻松幽默
+每张幻灯片有明确的主题
+适合视觉化呈现
+包含标题和正文内容
 文章内容：
 [在此处粘贴步骤1生成的文字总结]
 ```
 
 **5. 排版&配图设计**
+
 ```
 请根据以下幻灯片文字内容，为每张幻灯片提供详细的排版和配图设计方案。要求：
-*符合xxx色系（蓝色、紫色、绿色）
-*风格符合xxx
-*包含具体的字体选择、颜色搭配、图片元素描述
-*设计风格统一，(e.g. 符合轻松幽默又有深度的调性)
-*为每张幻灯片提供详细的视觉元素描述
-*每张幻灯片的配图位于右下角，不超过图片大小的1/6
-*size as 16:9
-*生成的图片不包含文字
+符合xxx色系（蓝色、紫色、绿色）
+风格符合xxx
+包含具体的字体选择、颜色搭配、图片元素描述
+设计风格统一，(e.g. 符合轻松幽默又有深度的调性)
+为每张幻灯片提供详细的视觉元素描述
+每张幻灯片的配图位于右下角，不超过图片大小的1/6
+size as 16:9
+生成的图片不包含文字
 
 幻灯片文字内容：
 [在此处粘贴步骤2生成的幻灯片文字内容]
@@ -211,22 +204,23 @@ Learning to celebrate every milestone along the way!
 **7. 整合&发布**
 
 整合所有内容：
-*将步骤1生成的文字总结作为公众号文章的主体。
-*将步骤4生成的幻灯片图片插入到文章的适当位置。
-*使用步骤5选定的标题作为文章标题。
-*使用步骤6生成的提示词在GPT-4o 生成封面图，或者直接使用步骤4生成的某张图片作为封面。
+将步骤1生成的文字总结作为公众号文章的主体。
+将步骤4生成的幻灯片图片插入到文章的适当位置。
+使用步骤5选定的标题作为文章标题。
+使用步骤6生成的提示词在GPT-4o 生成封面图，或者直接使用步骤4生成的某张图片作为封面。
 
 排版与美化：
-*在微信公众号后台进行最终排版，推荐直接使用markdown编辑排版。
-*确保图文搭配合理，视觉效果美观。
-*添加必要的分隔线、引用框等元素增强可读性。
+在微信公众号后台进行最终排版，推荐直接使用markdown编辑排版。
+确保图文搭配合理，视觉效果美观。
+添加必要的分隔线、引用框等元素增强可读性。
 
 审核与发布：
-*对整篇文章进行最终审核，确保内容准确、排版美观。
-*设置发布时间，选择最佳发布时段。
-*发布到微信公众号平台。
+对整篇文章进行最终审核，确保内容准确、排版美观。
+设置发布时间，选择最佳发布时段。
+发布到微信公众号平台。
 
 注意事项：
+
 * 内容一致性 ：确保所有生成的内容风格一致，符合《呼笑山庄》的轻松幽默又有深度的调性。
 * 视觉风格 ：所有图片设计要符合莫兰迪色系和现代极简风格。
 * 文字质量 ：确保文字内容简洁、亲切、易读，避免过于复杂的表达。
