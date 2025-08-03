@@ -118,20 +118,6 @@ export default function LabPage() {
         })) || []
         
         setApps(appsData)
-        
-        // Detailed debugging
-        console.log('🔍 DEBUGGING APPS DATA:')
-        console.log('Total apps fetched:', appsData.length)
-        appsData.forEach((app, index) => {
-          console.log(`\n📱 App ${index + 1}:`)
-          console.log('- ID:', app.id)
-          console.log('- Title:', app.title)
-          console.log('- Status:', app.status)
-          console.log('- Description length:', app.description?.length || 0)
-          console.log('- Body type:', typeof app.body)
-          console.log('- Body structure:', app.body ? Object.keys(app.body).slice(0, 5) : 'null')
-          console.log('- Raw body (first 200 chars):', JSON.stringify(app.body).substring(0, 200))
-        })
       } catch (error) {
         console.error('Error fetching apps:', error)
       } finally {
@@ -186,15 +172,11 @@ export default function LabPage() {
                     <h3 className="cyberpunk-title text-2xl font-bold text-white mb-4">
                       <span className="text-neon-cyan cyber-glow">Indie App</span>
                     </h3>
-                    {(() => {
-                      const filteredApps = apps.filter(app => 
-                        app.title.toLowerCase().includes('app') || 
-                        app.status === 'development' || 
-                        app.title.toLowerCase().includes('vase')
-                      )
-                      console.log('🎯 FILTERED APPS for Indie section:', filteredApps.map(a => ({title: a.title, status: a.status})))
-                      return filteredApps
-                    })().map((app) => (
+                    {apps.filter(app => 
+                      app.title.toLowerCase().includes('app') || 
+                      app.status === 'development' || 
+                      app.title.toLowerCase().includes('vase')
+                    ).map((app) => (
                       <div key={app.id} className="glass-panel">
                         <div className="p-6">
                           <div className="flex items-center gap-3 mb-6">
@@ -210,10 +192,7 @@ export default function LabPage() {
                             <div className="space-y-4">
                               <h5 className="text-lg font-semibold text-cyan-400">The Concept</h5>
                               <div className="text-white/80 text-sm leading-relaxed whitespace-pre-line">
-                                {(() => {
-                                  console.log(`📝 DESCRIPTION for ${app.title}:`, app.description)
-                                  return app.description || 'No description available'
-                                })()}
+                                {app.description || 'No description available'}
                               </div>
                               <div className="flex flex-wrap gap-2">
                                 <span className={`px-3 py-1 border rounded-full text-xs ${
@@ -233,7 +212,6 @@ export default function LabPage() {
                                 <h5 className="text-lg font-semibold text-cyan-400">Preview</h5>
                                 {(() => {
                                   const appImages = extractImagesFromBody(app.body)
-                                  console.log(`🖼️ IMAGES for ${app.title}:`, appImages.length, appImages)
                                   if (appImages.length === 0) return null
                                   
                                   return (
