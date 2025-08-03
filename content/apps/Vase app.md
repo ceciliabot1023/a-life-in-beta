@@ -22,10 +22,16 @@ description: >
   out.  
 
 
-  **Vase.** **Your feelings are welcome here.**  
+  <strong>Vase.</strong> <strong>Your feelings are welcome here.</strong>  
 
 
   Join the waitlist for your exclusive invitation.
 ---
 
-![](</images/Indie app/screen1.png>)![](</images/Indie app/screen2.png>)![](</images/Indie app/screen3.png>)![](</images/Indie app/screen4.png>)
+![Vase App Screen 1](/images/Indie app/screen1.png)
+
+![Vase App Screen 2](/images/Indie app/screen2.png)
+
+![Vase App Screen 3](/images/Indie app/screen3.png)
+
+![Vase App Screen 4](/images/Indie app/screen4.png)
