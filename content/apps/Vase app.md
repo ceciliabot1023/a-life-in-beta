@@ -1,5 +1,5 @@
 ---
-title: Vase
+title: Vase app
 status: development
 description: >
   What if you could find your center, even on the most demanding days?  
@@ -28,10 +28,4 @@ description: >
   Join the waitlist for your exclusive invitation.
 ---
 
-![Vase App Screen 1](/images/Indie%20app/screen1.png)
-
-![Vase App Screen 2](/images/Indie%20app/screen2.png)
-
-![Vase App Screen 3](/images/Indie%20app/screen%203.png)
-
-![Vase App Screen 4](/images/Indie%20app/screen4.png)
+![](</images/Indie app/screen1.png>)![](</images/Indie app/screen2.png>)![](</images/Indie app/screen3.png>)![](</images/Indie app/screen4.png>)
