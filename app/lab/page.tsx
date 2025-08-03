@@ -22,82 +22,24 @@ export default function LabPage() {
   const [apps, setApps] = useState<TinaApp[]>([])
   const [loading, setLoading] = useState(true)
   
-  // Function to extract images from app body content
+  // Simplified function to extract images from app body content
   const extractImagesFromBody = (body: TinaMarkdownContent) => {
     if (!body) return []
     
     const images: { id: number, title: string, image: string, description: string }[] = []
     
-    // Function to recursively search for images in the body structure
-    const findImages = (content: unknown) => {
-      if (Array.isArray(content)) {
-        content.forEach(findImages)
-      } else if (content && typeof content === 'object') {
-        const obj = content as Record<string, unknown>
-        
-        // Handle rich-text image objects
-        if (obj.type === 'img' && obj.url) {
-          images.push({
-            id: images.length + 1,
-            title: (obj.alt as string) || 'App Screenshot',
-            image: obj.url as string,
-            description: (obj.caption as string) || 'Application interface'
-          })
-        }
-        
-        // Handle paragraph with image content
-        if (obj.type === 'p' && obj.children) {
-          findImages(obj.children)
-        }
-        
-        // Handle markdown image text content
-        if (obj.type === 'text' && typeof obj.text === 'string') {
-          const markdownImageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g
-          let match
-          while ((match = markdownImageRegex.exec(obj.text)) !== null) {
-            images.push({
-              id: images.length + 1,
-              title: match[1] || 'App Screenshot',
-              image: match[2],
-              description: match[1] || 'Application interface'
-            })
-          }
-        }
-        
-        // Handle direct image nodes
-        if (obj.type === 'image' || obj.type === 'mdxJsxFlowElement') {
-          if (obj.url || obj.src) {
-            images.push({
-              id: images.length + 1,
-              title: (obj.alt as string) || 'App Screenshot',
-              image: (obj.url || obj.src) as string,
-              description: (obj.alt as string) || 'Application interface'
-            })
-          }
-        }
-        
-        // Recursively search in children
-        if (obj.children) {
-          findImages(obj.children)
-        }
-      }
-    }
+    // Convert entire body to string and extract markdown images
+    const bodyString = JSON.stringify(body)
+    const markdownImageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g
+    let match
     
-    findImages(body)
-    
-    // If no images found through rich-text parsing, try to extract from raw markdown
-    if (images.length === 0 && body) {
-      const bodyString = JSON.stringify(body)
-      const markdownImageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g
-      let match
-      while ((match = markdownImageRegex.exec(bodyString)) !== null) {
-        images.push({
-          id: images.length + 1,
-          title: match[1] || 'App Screenshot',
-          image: match[2],
-          description: match[1] || 'Application interface'
-        })
-      }
+    while ((match = markdownImageRegex.exec(bodyString)) !== null) {
+      images.push({
+        id: images.length + 1,
+        title: match[1] || 'App Screenshot',
+        image: match[2],
+        description: match[1] || 'Application interface'
+      })
     }
     
     return images
