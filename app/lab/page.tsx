@@ -37,7 +37,7 @@ export default function LabPage() {
       images.push({
         id: images.length + 1,
         title: match[1] || 'App Screenshot',
-        image: match[2],
+        image: decodeURIComponent(match[2]), // Decode URL encoding like %20 for spaces
         description: match[1] || 'Application interface'
       })
     }
