@@ -3,10 +3,11 @@ import { defineConfig } from 'tinacms'
 // Force re-index: 2025-07-31T16:30:00Z
 
 export default defineConfig({
-  contentApiUrlOverride: 
-    process.env.NODE_ENV === "development" 
-      ? "http://localhost:4001/graphql" 
-      : undefined, // Let it use TinaCloud in production
+  // Comment out or remove this line to always use TinaCloud
+  // contentApiUrlOverride: 
+  //   process.env.NODE_ENV === "development" 
+  //     ? "http://localhost:4001/graphql" 
+  //     : undefined,
   
   branch: 'main',
   clientId: process.env.TINA_CLIENT_ID || process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
