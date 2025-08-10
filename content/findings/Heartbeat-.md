@@ -1,11 +1,13 @@
 ---
-title: 'Heartbeat '
+title: Time will tell
 category: LIFE
 week: 2025-08-week-2
 date: 2025-08-09T16:00:00.000Z
 ---
 
 What can heal you is yourself. 
+
+I know time will heal. I should not catch you when you are falling. 
 
 ***
 
