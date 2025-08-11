@@ -1,34 +1,26 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'A Life in Beta - Personal Experiment Lab',
-  description: 'Documenting life experiments, metrics, and discoveries in real-time',
-  keywords: 'life experiments, personal development, metrics, beta testing life',
-  authors: [{ name: 'Your Name' }],
-  openGraph: {
-    title: 'A Life in Beta',
-    description: 'Personal experiment lab documenting life in beta mode',
-    type: 'website',
-  },
-}
-
-import { Analytics } from '@vercel/analytics/react'
+  title: "A Life in Beta",
+  description: "Experimenting with life optimization",
+};
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <body>
+      <body suppressHydrationWarning={true}>
         {children}
         <Analytics />
       </body>
     </html>
-  )
+  );
 }
