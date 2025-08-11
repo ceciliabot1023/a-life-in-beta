@@ -72,8 +72,8 @@ export default defineConfig({
                   description: 'Enter a numeric value (leave empty if not applicable)',
                   // Optional: Add validation if you want to enforce certain rules
                   validate: (value) => {
-                    // Allow null/empty values
-                    if (value === null || value === undefined || value === '') {
+                    // Allow null/undefined values
+                    if (value === null || value === undefined) {
                       return
                     }
                     // Check if it's a valid number
