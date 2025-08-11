@@ -20,6 +20,6 @@ export async function GET() {
   }
 }
 
-// Allow this route to be dynamically rendered
 export const dynamic = 'force-dynamic'
+
 
