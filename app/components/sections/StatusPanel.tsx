@@ -12,6 +12,11 @@ interface MetricData {
   trend: string
 }
 
+interface MetricsApiResponse {
+  metrics?: MetricData[]
+  error?: string
+}
+
 export function StatusPanel() {
   const [metrics, setMetrics] = useState<MetricData[]>([])
   const [loading, setLoading] = useState(true)
@@ -21,27 +26,27 @@ export function StatusPanel() {
       try {
         // Use API route instead of direct client query
         const response = await fetch('/api/metrics')
-        const data = await response.json()
+        const data: MetricsApiResponse = await response.json()
         
         console.log('Raw metrics response:', data.metrics)
         
-        const metricsData = data.metrics || []
+        const metricsData: MetricData[] = data.metrics || []
         
         console.log('Parsed metrics data:', metricsData)
         
         // Get the most recent metric for each category
         const latestMetrics: MetricData[] = []
-        const categories = ['income', 'focus-time', 'wellbeing', 'energy']
+        const categories: string[] = ['income', 'focus-time', 'wellbeing', 'energy']
         
-        categories.forEach(category => {
-          const categoryMetrics = metricsData.filter(m => m.category.toLowerCase() === category.toLowerCase())
+        categories.forEach((category: string) => {
+          const categoryMetrics = metricsData.filter((m: MetricData) => m.category.toLowerCase() === category.toLowerCase())
           console.log(`Metrics for ${category}:`, categoryMetrics)
           
           if (categoryMetrics.length > 0) {
             // Sort by week - handle various formats
-            const sortedMetrics = categoryMetrics.sort((a, b) => {
+            const sortedMetrics = categoryMetrics.sort((a: MetricData, b: MetricData) => {
               // Extract week info for comparison
-              const extractWeekInfo = (weekStr: string) => {
+              const extractWeekInfo = (weekStr: string): { year: number; week: number } => {
                 // Try pattern: YYYY-W## or YYYY-week-##
                 let match = weekStr.match(/(\d{4})[-\s]?[Ww]?(?:eek)?[-\s]?(\d+)/)
                 if (match) {
@@ -92,11 +97,11 @@ export function StatusPanel() {
     fetchMetrics()
   }, [])
   
-  const getMetricByCategory = (category: string) => {
-    return metrics.find(m => m.category === category)
+  const getMetricByCategory = (category: string): MetricData | undefined => {
+    return metrics.find((m: MetricData) => m.category === category)
   }
   
-  const getMetricColor = (trend: string) => {
+  const getMetricColor = (trend: string): string => {
     switch (trend) {
       case 'up': return 'text-green-400 border-green-400/30 from-green-500/10 to-green-600/20'
       case 'down': return 'text-red-400 border-red-400/30 from-red-500/10 to-red-600/20'
@@ -105,7 +110,7 @@ export function StatusPanel() {
     }
   }
   
-  const getTrendIcon = (trend: string) => {
+  const getTrendIcon = (trend: string): JSX.Element => {
     switch (trend) {
       case 'up': return <TrendingUp className="w-4 h-4" />
       case 'down': return <TrendingDown className="w-4 h-4" />

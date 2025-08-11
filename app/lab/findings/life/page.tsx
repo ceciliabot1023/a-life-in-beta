@@ -7,36 +7,28 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import client from '../../../../tina/__generated__/client'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import type { TinaFinding } from '../../../../types/tina'
 
+interface FindingsApiResponse {
+  findings?: TinaFinding[]
+  error?: string
+}
+
 export default function LifeFindingsPage() {
   const [findings, setFindings] = useState<TinaFinding[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     async function fetchFindings() {
       try {
-        const response = await client.queries.findingsConnection({
-          filter: {
-            category: {
-              eq: 'LIFE'
-            }
-          }
-        })
+        const response = await fetch('/api/findings?category=LIFE')
+        const data: FindingsApiResponse = await response.json()
         
-        const findingsData = response.data.findingsConnection.edges?.map(edge => ({
-          id: edge?.node?.id || '',
-          title: edge?.node?.title || '',
-          category: edge?.node?.category || '',
-          week: edge?.node?.week || '',
-          date: edge?.node?.date || '',
-          body: edge?.node?.body
-        })).filter(f => f.id) || []
+        const findingsData: TinaFinding[] = data.findings || []
         
         // Sort by date in descending order (newest first)
-        const sortedFindings = findingsData.sort((a, b) => {
+        const sortedFindings = findingsData.sort((a: TinaFinding, b: TinaFinding) => {
           const dateA = new Date(a.date).getTime()
           const dateB = new Date(b.date).getTime()
           return dateB - dateA
@@ -45,6 +37,7 @@ export default function LifeFindingsPage() {
         setFindings(sortedFindings)
       } catch (error) {
         console.error('Error fetching findings:', error)
+        setFindings([])
       } finally {
         setLoading(false)
       }
@@ -87,7 +80,7 @@ export default function LifeFindingsPage() {
           </div>
           
           <div className="space-y-8">
-            {findings.map((finding, index) => {
+            {findings.map((finding: TinaFinding, index: number) => {
               const slug = finding.title.toLowerCase().replace(/\s+/g, '-')
               const bodyContent = finding.body ? (
                 <TinaMarkdown content={finding.body} />
@@ -102,9 +95,16 @@ export default function LifeFindingsPage() {
                 >
                   <Link href={`/lab/findings/life/${slug}`}>
                     <GlassPanel className="p-6 hover:bg-white/10 transition-all duration-300 cursor-pointer">
-                      <div className="flex items-center space-x-3 mb-6">
-                        <span className="text-3xl">🌟</span>
-                        <h2 className="cyberpunk-title-glow text-3xl font-bold text-white">{finding.title}</h2>
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center space-x-3">
+                          <span className="text-3xl">🌟</span>
+                          <h2 className="cyberpunk-title-glow text-3xl font-bold text-white">{finding.title}</h2>
+                        </div>
+                        {index === 0 && (
+                          <span className="px-2 py-1 bg-purple-500/20 border border-purple-400/30 rounded-full text-xs text-purple-300">
+                            Latest
+                          </span>
+                        )}
                       </div>
                       
                       <div className="bg-white/5 p-4 rounded-lg border border-white/10">
@@ -113,12 +113,17 @@ export default function LifeFindingsPage() {
                             {bodyContent}
                           </div>
                         </div>
-                        <div className="text-white/40 text-xs">
-                          {new Date(finding.date).toLocaleDateString('en-US', {
-                            month: 'short',
-                            day: 'numeric',
-                            year: 'numeric'
-                          })}
+                        <div className="flex items-center justify-between">
+                          <div className="text-white/40 text-xs">
+                            {new Date(finding.date).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric'
+                            })}
+                          </div>
+                          <div className="text-white/40 text-xs">
+                            Week {finding.week}
+                          </div>
                         </div>
                       </div>
                     </GlassPanel>

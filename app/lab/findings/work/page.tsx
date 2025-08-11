@@ -7,46 +7,37 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import client from '../../../../tina/__generated__/client'
 import { TinaMarkdown } from "tinacms/dist/rich-text"
 import type { TinaFinding } from '../../../../types/tina'
 
+interface FindingsApiResponse {
+  findings?: TinaFinding[]
+  error?: string
+}
+
 export default function WorkFindingsPage() {
   const [findings, setFindings] = useState<TinaFinding[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     async function fetchFindings() {
       try {
-        // Remove the sort parameter from the query and add manual sorting
-        const response = await client.queries.findingsConnection({
-          filter: {
-            category: {
-              eq: 'WORK'
-            }
-          }
-          // Removed sort parameter - we'll sort manually
-        })
+        const response = await fetch('/api/findings?category=WORK')
+        const data: FindingsApiResponse = await response.json()
         
-        const findingsData = response.data.findingsConnection.edges?.map(edge => ({
-          id: edge?.node?.id || '',
-          title: edge?.node?.title || '',
-          category: edge?.node?.category || '',
-          week: edge?.node?.week || '',
-          date: edge?.node?.date || '',
-          body: edge?.node?.body
-        })).filter(f => f.id) || []
+        const findingsData: TinaFinding[] = data.findings || []
         
         // Sort by date in descending order (newest first)
-        const sortedFindings = findingsData.sort((a, b) => {
+        const sortedFindings = findingsData.sort((a: TinaFinding, b: TinaFinding) => {
           const dateA = new Date(a.date).getTime()
           const dateB = new Date(b.date).getTime()
-          return dateB - dateA  // Descending order
+          return dateB - dateA
         })
         
         setFindings(sortedFindings)
       } catch (error) {
         console.error('Error fetching findings:', error)
+        setFindings([])
       } finally {
         setLoading(false)
       }
@@ -89,8 +80,7 @@ export default function WorkFindingsPage() {
           </div>
           
           <div className="space-y-8">
-            {/* In the findings map section, wrap each finding with a Link: */}
-            {findings.map((finding, index) => {
+            {findings.map((finding: TinaFinding, index: number) => {
               const slug = finding.title.toLowerCase().replace(/\s+/g, '-')
               const bodyContent = finding.body ? (
                 <TinaMarkdown content={finding.body} />
@@ -110,7 +100,6 @@ export default function WorkFindingsPage() {
                           <span className="text-3xl">💼</span>
                           <h2 className="cyberpunk-title-glow text-3xl font-bold text-white">{finding.title}</h2>
                         </div>
-                        {/* Show if it's a recent finding */}
                         {index === 0 && (
                           <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-400/30 rounded-full text-xs text-cyan-300">
                             Latest
