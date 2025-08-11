@@ -84,7 +84,7 @@ export default function LabPage() {
               The <span className="text-neon-red cyber-glow">Lab</span>
             </h1>
             <p className="text-white/80 text-lg max-w-2xl mx-auto">
-              Welcome to the command center. Here you'll find real-time experiment data, 
+              Welcome to the command center. Here you will find real-time experiment data, 
               research findings, and the products emerging from this ongoing life redesign.
             </p>
           </div>
