@@ -2,57 +2,34 @@ import { NextResponse } from 'next/server'
 import client from '../../../tina/__generated__/client'
 
 export async function GET() {
-  const debugInfo: any = {
-    env: {
-      hasClientId: !!process.env.TINA_CLIENT_ID,
-      hasToken: !!process.env.TINA_TOKEN,
-      hasPublicClientId: !!process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-      nodeEnv: process.env.NODE_ENV,
-    },
-    clientId: process.env.TINA_CLIENT_ID?.substring(0, 10) + '...',
-  }
-
   try {
-    const metricsResponse = await client.queries.metricsConnection()
-    debugInfo.metrics = {
-      success: true,
-      count: metricsResponse.data.metricsConnection.edges?.length || 0,
-      sample: metricsResponse.data.metricsConnection.edges?.[0] || null
-    }
-  } catch (error: any) {
-    debugInfo.metrics = {
-      success: false,
-      error: error.message || 'Unknown error'
-    }
+    console.log('Fetching apps from TinaCMS...')
+    
+    const response = await client.queries.appsConnection()
+    
+    // Log what we got from TinaCMS
+    console.log('Apps response:', response.data.appsConnection.edges?.length, 'apps found')
+    
+    const appsData = response.data.appsConnection.edges?.map(edge => ({
+      id: edge?.node?.id || '',
+      title: edge?.node?.title || '',
+      status: edge?.node?.status || '',
+      description: edge?.node?.description,
+      body: edge?.node?.body
+    })) || []
+    
+    // Make sure we return the correct structure
+    const responseData = { apps: appsData }
+    console.log('Returning apps data:', responseData)
+    
+    return NextResponse.json(responseData)
+  } catch (error) {
+    console.error('Error fetching apps:', error)
+    return NextResponse.json({ 
+      error: 'Failed to fetch apps', 
+      apps: [] 
+    }, { status: 500 })
   }
-
-  try {
-    const findingsResponse = await client.queries.findingsConnection()
-    debugInfo.findings = {
-      success: true,
-      count: findingsResponse.data.findingsConnection.edges?.length || 0
-    }
-  } catch (error: any) {
-    debugInfo.findings = {
-      success: false,
-      error: error.message || 'Unknown error'
-    }
-  }
-
-  try {
-    const appsResponse = await client.queries.appsConnection()
-    debugInfo.apps = {
-      success: true,
-      count: appsResponse.data.appsConnection.edges?.length || 0
-    }
-  } catch (error: any) {
-    debugInfo.apps = {
-      success: false,
-      error: error.message || 'Unknown error'
-    }
-  }
-
-  return NextResponse.json(debugInfo)
 }
 
 export const dynamic = 'force-dynamic'
