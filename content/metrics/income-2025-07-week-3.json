@@ -1,9 +1,7 @@
 {
   "category": "income",
   "week": "2025-07-week-3",
-  "data": {
-    "value": 400,
+    "value": "400",
     "unit": "USD",
     "trend": "unstable"
-  }
 }
