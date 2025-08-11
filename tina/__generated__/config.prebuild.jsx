@@ -66,21 +66,8 @@ var config_default = defineConfig({
                 label: "Value",
                 required: false,
                 ui: {
-                  // Parse empty strings or invalid input as null
-                  parse: (val) => {
-                    if (val === "" || val === null || val === void 0) {
-                      return null;
-                    }
-                    const parsed = Number(val);
-                    return isNaN(parsed) ? null : parsed;
-                  },
-                  // Format null values as empty string for display
-                  format: (val) => {
-                    if (val === null || val === void 0) {
-                      return "";
-                    }
-                    return String(val);
-                  },
+                  // Add a helpful description
+                  description: "Enter a numeric value (leave empty if not applicable)",
                   // Optional: Add validation if you want to enforce certain rules
                   validate: (value) => {
                     if (value === null || value === void 0 || value === "") {
@@ -90,9 +77,7 @@ var config_default = defineConfig({
                       return;
                     }
                     return "Please enter a valid number";
-                  },
-                  // Add a helpful description
-                  description: "Enter a numeric value (leave empty if not applicable)"
+                  }
                 }
               },
               {
@@ -101,9 +86,7 @@ var config_default = defineConfig({
                 label: "Unit",
                 required: false,
                 ui: {
-                  description: "e.g., hours, dollars, percentage",
-                  // Trim whitespace
-                  parse: (val) => val ? val.trim() : ""
+                  description: "e.g., hours, dollars, percentage"
                 }
               },
               {
@@ -230,9 +213,7 @@ var config_default = defineConfig({
             options: ["concept", "development", "testing", "launched"],
             required: false,
             ui: {
-              description: "Current status of the app",
-              defaultValue: "concept"
-              // Set a default value
+              description: "Current status of the app"
             }
           },
           {
