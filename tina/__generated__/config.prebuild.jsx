@@ -70,7 +70,7 @@ var config_default = defineConfig({
                   description: "Enter a numeric value (leave empty if not applicable)",
                   // Optional: Add validation if you want to enforce certain rules
                   validate: (value) => {
-                    if (value === null || value === void 0 || value === "") {
+                    if (value === null || value === void 0) {
                       return;
                     }
                     if (typeof value === "number" && !isNaN(value)) {
