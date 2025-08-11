@@ -201,18 +201,13 @@ export type CollectionDocumentsArgs = {
 
 export type DocumentNode = Metrics | Findings | Apps | Folder;
 
-export type MetricsData = {
-  __typename?: 'MetricsData';
-  value?: Maybe<Scalars['Float']['output']>;
-  unit?: Maybe<Scalars['String']['output']>;
-  trend?: Maybe<Scalars['String']['output']>;
-};
-
 export type Metrics = Node & Document & {
   __typename?: 'Metrics';
   category: Scalars['String']['output'];
   week: Scalars['String']['output'];
-  data?: Maybe<MetricsData>;
+  value?: Maybe<Scalars['String']['output']>;
+  unit?: Maybe<Scalars['String']['output']>;
+  trend?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -225,26 +220,12 @@ export type StringFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type NumberFilter = {
-  lt?: InputMaybe<Scalars['Float']['input']>;
-  lte?: InputMaybe<Scalars['Float']['input']>;
-  gte?: InputMaybe<Scalars['Float']['input']>;
-  gt?: InputMaybe<Scalars['Float']['input']>;
-  eq?: InputMaybe<Scalars['Float']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
-};
-
-export type MetricsDataFilter = {
-  value?: InputMaybe<NumberFilter>;
-  unit?: InputMaybe<StringFilter>;
-  trend?: InputMaybe<StringFilter>;
-};
-
 export type MetricsFilter = {
   category?: InputMaybe<StringFilter>;
   week?: InputMaybe<StringFilter>;
-  data?: InputMaybe<MetricsDataFilter>;
+  value?: InputMaybe<StringFilter>;
+  unit?: InputMaybe<StringFilter>;
+  trend?: InputMaybe<StringFilter>;
 };
 
 export type MetricsConnectionEdges = {
@@ -435,16 +416,12 @@ export type DocumentMutation = {
   apps?: InputMaybe<AppsMutation>;
 };
 
-export type MetricsDataMutation = {
-  value?: InputMaybe<Scalars['Float']['input']>;
-  unit?: InputMaybe<Scalars['String']['input']>;
-  trend?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type MetricsMutation = {
   category?: InputMaybe<Scalars['String']['input']>;
   week?: InputMaybe<Scalars['String']['input']>;
-  data?: InputMaybe<MetricsDataMutation>;
+  value?: InputMaybe<Scalars['String']['input']>;
+  unit?: InputMaybe<Scalars['String']['input']>;
+  trend?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type FindingsMutation = {
@@ -462,7 +439,7 @@ export type AppsMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type MetricsPartsFragment = { __typename: 'Metrics', category: string, week: string, data?: { __typename: 'MetricsData', value?: number | null, unit?: string | null, trend?: string | null } | null };
+export type MetricsPartsFragment = { __typename: 'Metrics', category: string, week: string, value?: string | null, unit?: string | null, trend?: string | null };
 
 export type FindingsPartsFragment = { __typename: 'Findings', title: string, category: string, week: string, date: string, body?: any | null };
 
@@ -473,7 +450,7 @@ export type MetricsQueryVariables = Exact<{
 }>;
 
 
-export type MetricsQuery = { __typename?: 'Query', metrics: { __typename: 'Metrics', id: string, category: string, week: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data?: { __typename: 'MetricsData', value?: number | null, unit?: string | null, trend?: string | null } | null } };
+export type MetricsQuery = { __typename?: 'Query', metrics: { __typename: 'Metrics', id: string, category: string, week: string, value?: string | null, unit?: string | null, trend?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type MetricsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -485,7 +462,7 @@ export type MetricsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type MetricsConnectionQuery = { __typename?: 'Query', metricsConnection: { __typename?: 'MetricsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'MetricsConnectionEdges', cursor: string, node?: { __typename: 'Metrics', id: string, category: string, week: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, data?: { __typename: 'MetricsData', value?: number | null, unit?: string | null, trend?: string | null } | null } | null } | null> | null } };
+export type MetricsConnectionQuery = { __typename?: 'Query', metricsConnection: { __typename?: 'MetricsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'MetricsConnectionEdges', cursor: string, node?: { __typename: 'Metrics', id: string, category: string, week: string, value?: string | null, unit?: string | null, trend?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type FindingsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -530,12 +507,9 @@ export const MetricsPartsFragmentDoc = gql`
   __typename
   category
   week
-  data {
-    __typename
-    value
-    unit
-    trend
-  }
+  value
+  unit
+  trend
 }
     `;
 export const FindingsPartsFragmentDoc = gql`
@@ -796,7 +770,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/1.6/content/9bf24b29-3afb-4a7d-86be-f676ed425a9a/github/main",
+        url: "http://localhost:4001/graphql",
         queries,
       })
     )

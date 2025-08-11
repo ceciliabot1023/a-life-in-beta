@@ -1,9 +1,7 @@
 {
   "category": "wellbeing",
   "week": "2025-07-week-3",
-  "data": {
-    "value": 7,
-    "unit": "scale 1-10",
-    "trend": "up"
-  }
+  "value": "7",
+  "unit": "scale 1-10",
+  "trend": "up"
 }

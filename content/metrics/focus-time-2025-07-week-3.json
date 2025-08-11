@@ -1,9 +1,7 @@
 {
   "category": "focus-time",
   "week": "2025-07-week-3",
-  "data": {
-    "value": 15,
-    "unit": "hours",
-    "trend": "unstable"
-  }
+  "value": "15",
+  "unit": "hours",
+  "trend": "unstable"
 }

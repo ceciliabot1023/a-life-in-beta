@@ -31,75 +31,40 @@ var config_default = defineConfig({
             type: "string",
             name: "category",
             label: "Category",
-            required: true,
-            ui: {
-              validate: (value) => {
-                if (!value || value.trim() === "") {
-                  return "Category is required";
-                }
-              }
-            }
+            required: true
           },
           {
             type: "string",
             name: "week",
             label: "Week",
-            required: true,
+            required: true
+          },
+          // Simplified: Use individual fields instead of nested object
+          {
+            type: "string",
+            // Changed from number to string
+            name: "value",
+            label: "Value",
+            required: false,
             ui: {
-              validate: (value) => {
-                if (!value || value.trim() === "") {
-                  return "Week is required";
-                }
-              }
+              description: "Metric value (can be a number or text)"
             }
           },
           {
-            type: "object",
-            name: "data",
-            label: "Data",
+            type: "string",
+            name: "unit",
+            label: "Unit",
             required: false,
-            // Make the entire object optional
-            fields: [
-              {
-                type: "number",
-                name: "value",
-                label: "Value",
-                required: false,
-                ui: {
-                  // Add a helpful description
-                  description: "Enter a numeric value (leave empty if not applicable)",
-                  // Optional: Add validation if you want to enforce certain rules
-                  validate: (value) => {
-                    if (value === null || value === void 0) {
-                      return;
-                    }
-                    if (typeof value === "number" && !isNaN(value)) {
-                      return;
-                    }
-                    return "Please enter a valid number";
-                  }
-                }
-              },
-              {
-                type: "string",
-                name: "unit",
-                label: "Unit",
-                required: false,
-                ui: {
-                  description: "e.g., hours, dollars, percentage"
-                }
-              },
-              {
-                type: "string",
-                name: "trend",
-                label: "Trend",
-                required: false,
-                options: ["up", "down", "stable", "n/a"],
-                ui: {
-                  description: "Select the trend direction"
-                }
-              }
-            ]
+            ui: {
+              description: "e.g., hours, dollars, percentage"
+            }
+          },
+          {
+            type: "string",
+            name: "trend",
+            label: "Trend",
+            required: false,
+            options: ["up", "down", "stable", "n/a"]
           }
         ]
       },
@@ -114,44 +79,20 @@ var config_default = defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
-            required: true,
-            ui: {
-              validate: (value) => {
-                if (!value || value.trim() === "") {
-                  return "Title is required";
-                }
-                if (value.length < 3) {
-                  return "Title must be at least 3 characters long";
-                }
-              }
-            }
+            required: true
           },
           {
             type: "string",
             name: "category",
             label: "Category",
             options: ["WORK", "LIFE"],
-            required: true,
-            ui: {
-              validate: (value) => {
-                if (!value) {
-                  return "Please select a category";
-                }
-              }
-            }
+            required: true
           },
           {
             type: "string",
             name: "week",
             label: "Week",
-            required: true,
-            ui: {
-              validate: (value) => {
-                if (!value || value.trim() === "") {
-                  return "Week is required";
-                }
-              }
-            }
+            required: true
           },
           {
             type: "datetime",
@@ -159,17 +100,7 @@ var config_default = defineConfig({
             label: "Date",
             required: true,
             ui: {
-              dateFormat: "YYYY-MM-DD",
-              validate: (value) => {
-                if (!value) {
-                  return "Date is required";
-                }
-                const selectedDate = new Date(value);
-                const today = /* @__PURE__ */ new Date();
-                if (selectedDate > today) {
-                  return "Date cannot be in the future";
-                }
-              }
+              dateFormat: "YYYY-MM-DD"
             }
           },
           {
@@ -191,30 +122,14 @@ var config_default = defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
-            required: true,
-            ui: {
-              validate: (value) => {
-                if (!value || value.trim() === "") {
-                  return "Title is required";
-                }
-                if (value.length < 2) {
-                  return "Title must be at least 2 characters long";
-                }
-                if (value.length > 100) {
-                  return "Title must be less than 100 characters";
-                }
-              }
-            }
+            required: true
           },
           {
             type: "string",
             name: "status",
             label: "Status",
             options: ["concept", "development", "testing", "launched"],
-            required: false,
-            ui: {
-              description: "Current status of the app"
-            }
+            required: false
           },
           {
             type: "string",
@@ -222,13 +137,7 @@ var config_default = defineConfig({
             label: "Description",
             required: false,
             ui: {
-              component: "textarea",
-              description: "Brief description of the app",
-              validate: (value) => {
-                if (value && value.length > 500) {
-                  return "Description must be less than 500 characters";
-                }
-              }
+              component: "textarea"
             }
           },
           {

@@ -1,6 +1,6 @@
 import { defineConfig } from 'tinacms'
 
-// Force re-index: 2025-07-31T16:30:00Z
+// Force re-index: 2025-08-11T18:00:00Z
 
 export default defineConfig({
   // Comment out or remove this line to always use TinaCloud
@@ -35,75 +35,38 @@ export default defineConfig({
             name: 'category',
             label: 'Category',
             required: true,
-            ui: {
-              validate: (value) => {
-                if (!value || value.trim() === '') {
-                  return 'Category is required'
-                }
-              }
-            }
           },
           {
             type: 'string',
             name: 'week',
             label: 'Week',
             required: true,
+          },
+          // Simplified: Use individual fields instead of nested object
+          {
+            type: 'string',  // Changed from number to string
+            name: 'value',
+            label: 'Value',
+            required: false,
             ui: {
-              validate: (value) => {
-                if (!value || value.trim() === '') {
-                  return 'Week is required'
-                }
-              }
+              description: 'Metric value (can be a number or text)',
             }
           },
           {
-            type: 'object',
-            name: 'data',
-            label: 'Data',
-            required: false, // Make the entire object optional
-            fields: [
-              {
-                type: 'number',
-                name: 'value',
-                label: 'Value',
-                required: false,
-                ui: {
-                  // Add a helpful description
-                  description: 'Enter a numeric value (leave empty if not applicable)',
-                  // Optional: Add validation if you want to enforce certain rules
-                  validate: (value) => {
-                    // Allow null/undefined values
-                    if (value === null || value === undefined) {
-                      return
-                    }
-                    // Check if it's a valid number
-                    if (typeof value === 'number' && !isNaN(value)) {
-                      return
-                    }
-                    return 'Please enter a valid number'
-                  },
-                }
-              },
-              {
-                type: 'string',
-                name: 'unit',
-                label: 'Unit',
-                required: false,
-                ui: {
-                  description: 'e.g., hours, dollars, percentage',
-                }
-              },
-              {
-                type: 'string',
-                name: 'trend',
-                label: 'Trend',
-                required: false,
-                options: ['up', 'down', 'stable', 'n/a'],
-                ui: {
-                  description: 'Select the trend direction',
-                }
-              },
-            ],
+            type: 'string',
+            name: 'unit',
+            label: 'Unit',
+            required: false,
+            ui: {
+              description: 'e.g., hours, dollars, percentage',
+            }
+          },
+          {
+            type: 'string',
+            name: 'trend',
+            label: 'Trend',
+            required: false,
+            options: ['up', 'down', 'stable', 'n/a'],
           },
         ],
       },
@@ -119,16 +82,6 @@ export default defineConfig({
             label: 'Title',
             isTitle: true,
             required: true,
-            ui: {
-              validate: (value) => {
-                if (!value || value.trim() === '') {
-                  return 'Title is required'
-                }
-                if (value.length < 3) {
-                  return 'Title must be at least 3 characters long'
-                }
-              }
-            }
           },
           {
             type: 'string',
@@ -136,32 +89,12 @@ export default defineConfig({
             label: 'Category',
             options: ['WORK', 'LIFE'],
             required: true,
-            ui: {
-              validate: (value) => {
-                if (!value) {
-                  return 'Please select a category'
-                }
-              }
-            }
           },
           {
             type: 'string',
             name: 'week',
             label: 'Week',
             required: true,
-            ui: {
-              validate: (value) => {
-                if (!value || value.trim() === '') {
-                  return 'Week is required'
-                }
-                // Optional: Add week format validation
-                // Example: if expecting format like "2024-W01"
-                // const weekPattern = /^\d{4}-W\d{2}$/
-                // if (!weekPattern.test(value)) {
-                //   return 'Week format should be YYYY-WXX (e.g., 2024-W01)'
-                // }
-              }
-            }
           },
           {
             type: 'datetime',
@@ -170,17 +103,6 @@ export default defineConfig({
             required: true,
             ui: {
               dateFormat: 'YYYY-MM-DD',
-              validate: (value) => {
-                if (!value) {
-                  return 'Date is required'
-                }
-                // Check if date is not in the future
-                const selectedDate = new Date(value)
-                const today = new Date()
-                if (selectedDate > today) {
-                  return 'Date cannot be in the future'
-                }
-              }
             }
           },
           {
@@ -203,19 +125,6 @@ export default defineConfig({
             label: 'Title',
             isTitle: true,
             required: true,
-            ui: {
-              validate: (value) => {
-                if (!value || value.trim() === '') {
-                  return 'Title is required'
-                }
-                if (value.length < 2) {
-                  return 'Title must be at least 2 characters long'
-                }
-                if (value.length > 100) {
-                  return 'Title must be less than 100 characters'
-                }
-              }
-            }
           },
           {
             type: 'string',
@@ -223,9 +132,6 @@ export default defineConfig({
             label: 'Status',
             options: ['concept', 'development', 'testing', 'launched'],
             required: false,
-            ui: {
-              description: 'Current status of the app',
-            }
           },
           {
             type: 'string',
@@ -234,12 +140,6 @@ export default defineConfig({
             required: false,
             ui: {
               component: 'textarea',
-              description: 'Brief description of the app',
-              validate: (value) => {
-                if (value && value.length > 500) {
-                  return 'Description must be less than 500 characters'
-                }
-              }
             }
           },
           {

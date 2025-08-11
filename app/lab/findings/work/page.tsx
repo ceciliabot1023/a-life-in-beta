@@ -18,13 +18,14 @@ export default function WorkFindingsPage() {
   useEffect(() => {
     async function fetchFindings() {
       try {
+        // Remove the sort parameter from the query and add manual sorting
         const response = await client.queries.findingsConnection({
           filter: {
             category: {
               eq: 'WORK'
             }
-          },
-          sort: 'date'
+          }
+          // Removed sort parameter - we'll sort manually
         })
         
         const findingsData = response.data.findingsConnection.edges?.map(edge => ({
@@ -36,7 +37,14 @@ export default function WorkFindingsPage() {
           body: edge?.node?.body
         })).filter(f => f.id) || []
         
-        setFindings(findingsData)
+        // Sort by date in descending order (newest first)
+        const sortedFindings = findingsData.sort((a, b) => {
+          const dateA = new Date(a.date).getTime()
+          const dateB = new Date(b.date).getTime()
+          return dateB - dateA  // Descending order
+        })
+        
+        setFindings(sortedFindings)
       } catch (error) {
         console.error('Error fetching findings:', error)
       } finally {
@@ -97,9 +105,17 @@ export default function WorkFindingsPage() {
                 >
                   <Link href={`/lab/findings/work/${slug}`}>
                     <GlassPanel className="p-6 hover:bg-white/10 transition-all duration-300 cursor-pointer">
-                      <div className="flex items-center space-x-3 mb-6">
-                        <span className="text-3xl">💼</span>
-                        <h2 className="cyberpunk-title-glow text-3xl font-bold text-white">{finding.title}</h2>
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center space-x-3">
+                          <span className="text-3xl">💼</span>
+                          <h2 className="cyberpunk-title-glow text-3xl font-bold text-white">{finding.title}</h2>
+                        </div>
+                        {/* Show if it's a recent finding */}
+                        {index === 0 && (
+                          <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-400/30 rounded-full text-xs text-cyan-300">
+                            Latest
+                          </span>
+                        )}
                       </div>
                       
                       <div className="bg-white/5 p-4 rounded-lg border border-white/10">
@@ -108,12 +124,17 @@ export default function WorkFindingsPage() {
                             {bodyContent}
                           </div>
                         </div>
-                        <div className="text-white/40 text-xs">
-                          {new Date(finding.date).toLocaleDateString('en-US', { 
-                            month: 'short', 
-                            day: 'numeric', 
-                            year: 'numeric' 
-                          })}
+                        <div className="flex items-center justify-between">
+                          <div className="text-white/40 text-xs">
+                            {new Date(finding.date).toLocaleDateString('en-US', { 
+                              month: 'short', 
+                              day: 'numeric', 
+                              year: 'numeric' 
+                            })}
+                          </div>
+                          <div className="text-white/40 text-xs">
+                            Week {finding.week}
+                          </div>
                         </div>
                       </div>
                     </GlassPanel>

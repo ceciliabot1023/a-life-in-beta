@@ -2,12 +2,9 @@ fragment MetricsParts on Metrics {
   __typename
   category
   week
-  data {
-    __typename
-    value
-    unit
-    trend
-  }
+  value
+  unit
+  trend
 }
 
 fragment FindingsParts on Findings {

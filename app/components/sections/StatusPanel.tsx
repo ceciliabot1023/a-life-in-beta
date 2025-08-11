@@ -8,11 +8,9 @@ import client from '../../../tina/__generated__/client'
 interface MetricData {
   category: string
   week: string
-  data: {
-    value: number
-    unit: string
-    trend: string
-  }
+  value: string  // Changed to string as per new schema
+  unit: string
+  trend: string
 }
 
 export function StatusPanel() {
@@ -27,11 +25,9 @@ export function StatusPanel() {
         const metricsData = response.data.metricsConnection.edges?.map(edge => ({
           category: edge?.node?.category || '',
           week: edge?.node?.week || '',
-          data: {
-            value: edge?.node?.data?.value ?? 0,
-            unit: edge?.node?.data?.unit ?? '',
-            trend: edge?.node?.data?.trend ?? ''
-          }
+          value: edge?.node?.value || '',  // Direct access, not nested
+          unit: edge?.node?.unit || '',    // Direct access, not nested
+          trend: edge?.node?.trend || ''   // Direct access, not nested
         })) || []
         
         // Get the most recent metric for each category
@@ -104,75 +100,75 @@ export function StatusPanel() {
       </h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className={`bg-gradient-to-br from-${getMetricColor(incomeMetric?.data.trend || 'blue')}-500/10 to-${getMetricColor(incomeMetric?.data.trend || 'blue')}-600/20 p-5 rounded-lg border border-${getMetricColor(incomeMetric?.data.trend || 'blue')}-400/30 backdrop-blur-sm`}>
-          <div className={`text-${getMetricColor(incomeMetric?.data.trend || 'blue')}-400 font-semibold mb-3 flex items-center gap-2`}>
+        <div className={`bg-gradient-to-br from-${getMetricColor(incomeMetric?.trend || 'blue')}-500/10 to-${getMetricColor(incomeMetric?.trend || 'blue')}-600/20 p-5 rounded-lg border border-${getMetricColor(incomeMetric?.trend || 'blue')}-400/30 backdrop-blur-sm`}>
+          <div className={`text-${getMetricColor(incomeMetric?.trend || 'blue')}-400 font-semibold mb-3 flex items-center gap-2`}>
             💰 <span>Income</span>
           </div>
           <div className="flex items-baseline gap-2 mb-2">
             <div className="text-white text-3xl font-bold cyberpunk-title">
-              {incomeMetric?.data.value || 'N/A'}
+              {incomeMetric?.value || 'N/A'}
             </div>
             <div className="text-white/60 text-lg font-medium">
-              {incomeMetric?.data.unit || ''}
+              {incomeMetric?.unit || ''}
             </div>
           </div>
-          <div className={`flex items-center gap-2 text-${getMetricColor(incomeMetric?.data.trend || 'blue')}-400 text-sm font-medium`}>
-            {getTrendIcon(incomeMetric?.data.trend || 'stable')}
-            <span className="capitalize">{incomeMetric?.data.trend || 'stable'}</span>
+          <div className={`flex items-center gap-2 text-${getMetricColor(incomeMetric?.trend || 'blue')}-400 text-sm font-medium`}>
+            {getTrendIcon(incomeMetric?.trend || 'stable')}
+            <span className="capitalize">{incomeMetric?.trend || 'stable'}</span>
           </div>
         </div>
         
-        <div className={`bg-gradient-to-br from-${getMetricColor(focusMetric?.data.trend || 'blue')}-500/10 to-${getMetricColor(focusMetric?.data.trend || 'blue')}-600/20 p-5 rounded-lg border border-${getMetricColor(focusMetric?.data.trend || 'blue')}-400/30 backdrop-blur-sm`}>
-          <div className={`text-${getMetricColor(focusMetric?.data.trend || 'blue')}-400 font-semibold mb-3 flex items-center gap-2`}>
+        <div className={`bg-gradient-to-br from-${getMetricColor(focusMetric?.trend || 'blue')}-500/10 to-${getMetricColor(focusMetric?.trend || 'blue')}-600/20 p-5 rounded-lg border border-${getMetricColor(focusMetric?.trend || 'blue')}-400/30 backdrop-blur-sm`}>
+          <div className={`text-${getMetricColor(focusMetric?.trend || 'blue')}-400 font-semibold mb-3 flex items-center gap-2`}>
             ⏰ <span>Focus Time</span>
           </div>
           <div className="flex items-baseline gap-2 mb-2">
             <div className="text-white text-3xl font-bold cyberpunk-title">
-              {focusMetric?.data.value || 'N/A'}
+              {focusMetric?.value || 'N/A'}
             </div>
             <div className="text-white/60 text-lg font-medium">
-              {focusMetric?.data.unit || ''}
+              {focusMetric?.unit || ''}
             </div>
           </div>
-          <div className={`flex items-center gap-2 text-${getMetricColor(focusMetric?.data.trend || 'blue')}-400 text-sm font-medium`}>
-            {getTrendIcon(focusMetric?.data.trend || 'stable')}
-            <span className="capitalize">{focusMetric?.data.trend || 'stable'}</span>
+          <div className={`flex items-center gap-2 text-${getMetricColor(focusMetric?.trend || 'blue')}-400 text-sm font-medium`}>
+            {getTrendIcon(focusMetric?.trend || 'stable')}
+            <span className="capitalize">{focusMetric?.trend || 'stable'}</span>
           </div>
         </div>
         
-        <div className={`bg-gradient-to-br from-${getMetricColor(energyMetric?.data.trend || 'blue')}-500/10 to-${getMetricColor(energyMetric?.data.trend || 'blue')}-600/20 p-5 rounded-lg border border-${getMetricColor(energyMetric?.data.trend || 'blue')}-400/30 backdrop-blur-sm`}>
-          <div className={`text-${getMetricColor(energyMetric?.data.trend || 'blue')}-400 font-semibold mb-3 flex items-center gap-2`}>
+        <div className={`bg-gradient-to-br from-${getMetricColor(energyMetric?.trend || 'blue')}-500/10 to-${getMetricColor(energyMetric?.trend || 'blue')}-600/20 p-5 rounded-lg border border-${getMetricColor(energyMetric?.trend || 'blue')}-400/30 backdrop-blur-sm`}>
+          <div className={`text-${getMetricColor(energyMetric?.trend || 'blue')}-400 font-semibold mb-3 flex items-center gap-2`}>
             🌱 <span>Energy</span>
           </div>
           <div className="flex items-baseline gap-2 mb-2">
             <div className="text-white text-3xl font-bold cyberpunk-title">
-              {energyMetric?.data.value || 'N/A'}
+              {energyMetric?.value || 'N/A'}
             </div>
             <div className="text-white/60 text-lg font-medium">
-              {energyMetric?.data.unit || ''}
+              {energyMetric?.unit || ''}
             </div>
           </div>
-          <div className={`flex items-center gap-2 text-${getMetricColor(energyMetric?.data.trend || 'blue')}-400 text-sm font-medium`}>
-            {getTrendIcon(energyMetric?.data.trend || 'stable')}
-            <span className="capitalize">{energyMetric?.data.trend || 'stable'}</span>
+          <div className={`flex items-center gap-2 text-${getMetricColor(energyMetric?.trend || 'blue')}-400 text-sm font-medium`}>
+            {getTrendIcon(energyMetric?.trend || 'stable')}
+            <span className="capitalize">{energyMetric?.trend || 'stable'}</span>
           </div>
         </div>
         
-        <div className={`bg-gradient-to-br from-${getMetricColor(wellbeingMetric?.data.trend || 'blue')}-500/10 to-${getMetricColor(wellbeingMetric?.data.trend || 'blue')}-600/20 p-5 rounded-lg border border-${getMetricColor(wellbeingMetric?.data.trend || 'blue')}-400/30 backdrop-blur-sm`}>
-          <div className={`text-${getMetricColor(wellbeingMetric?.data.trend || 'blue')}-400 font-semibold mb-3 flex items-center gap-2`}>
+        <div className={`bg-gradient-to-br from-${getMetricColor(wellbeingMetric?.trend || 'blue')}-500/10 to-${getMetricColor(wellbeingMetric?.trend || 'blue')}-600/20 p-5 rounded-lg border border-${getMetricColor(wellbeingMetric?.trend || 'blue')}-400/30 backdrop-blur-sm`}>
+          <div className={`text-${getMetricColor(wellbeingMetric?.trend || 'blue')}-400 font-semibold mb-3 flex items-center gap-2`}>
             🧘 <span>Well-being</span>
           </div>
           <div className="flex items-baseline gap-2 mb-2">
             <div className="text-white text-3xl font-bold cyberpunk-title">
-              {wellbeingMetric?.data.value || 'N/A'}
+              {wellbeingMetric?.value || 'N/A'}
             </div>
             <div className="text-white/60 text-lg font-medium">
-              {wellbeingMetric?.data.unit || ''}
+              {wellbeingMetric?.unit || ''}
             </div>
           </div>
-          <div className={`flex items-center gap-2 text-${getMetricColor(wellbeingMetric?.data.trend || 'blue')}-400 text-sm font-medium`}>
-            {getTrendIcon(wellbeingMetric?.data.trend || 'stable')}
-            <span className="capitalize">{wellbeingMetric?.data.trend || 'stable'}</span>
+          <div className={`flex items-center gap-2 text-${getMetricColor(wellbeingMetric?.trend || 'blue')}-400 text-sm font-medium`}>
+            {getTrendIcon(wellbeingMetric?.trend || 'stable')}
+            <span className="capitalize">{wellbeingMetric?.trend || 'stable'}</span>
           </div>
         </div>
       </div>

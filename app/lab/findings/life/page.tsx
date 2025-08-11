@@ -97,7 +97,9 @@ export default function LifeFindingsPage() {
                   <Link href={`/lab/findings/life/${slug}`}>
                     <GlassPanel className="p-6 hover:bg-white/10 transition-all duration-300 cursor-pointer">
                       <div className="flex items-center space-x-3 mb-6">
-                        <span className="text-3xl">🌟</span>
+                        // Apply the same sorting logic and UI improvements
+                        // Change the icon from 🌟 to 🌱 to match the updated design
+                        <span className="text-3xl">🌱</span>
                         <h2 className="cyberpunk-title-glow text-3xl font-bold text-white">{finding.title}</h2>
                       </div>
                       
