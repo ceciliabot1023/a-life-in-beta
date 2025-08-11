@@ -8,7 +8,7 @@ import client from '../../../tina/__generated__/client'
 interface MetricData {
   category: string
   week: string
-  value: string  // Changed to string as per new schema
+  value: string
   unit: string
   trend: string
 }
@@ -22,13 +22,17 @@ export function StatusPanel() {
       try {
         const response = await client.queries.metricsConnection()
         
+        console.log('Raw metrics response:', response.data.metricsConnection.edges)
+        
         const metricsData = response.data.metricsConnection.edges?.map(edge => ({
           category: edge?.node?.category || '',
           week: edge?.node?.week || '',
-          value: edge?.node?.value || '',  // Direct access, not nested
-          unit: edge?.node?.unit || '',    // Direct access, not nested
-          trend: edge?.node?.trend || ''   // Direct access, not nested
+          value: edge?.node?.value || '',
+          unit: edge?.node?.unit || '',
+          trend: edge?.node?.trend || ''
         })) || []
+        
+        console.log('Parsed metrics data:', metricsData)
         
         // Get the most recent metric for each category
         const latestMetrics: MetricData[] = []
@@ -36,13 +40,48 @@ export function StatusPanel() {
         
         categories.forEach(category => {
           const categoryMetrics = metricsData.filter(m => m.category === category)
+          console.log(`Metrics for ${category}:`, categoryMetrics)
+          
           if (categoryMetrics.length > 0) {
-            // Sort by week (assuming format: YYYY-MM-week-N) and get the latest
+            // Sort by week - handle various formats
             const sortedMetrics = categoryMetrics.sort((a, b) => {
-              const weekA = a.week.split('-week-')[1] || '0'
-              const weekB = b.week.split('-week-')[1] || '0'
-              return parseInt(weekB) - parseInt(weekA)
+              // Extract week info for comparison
+              const extractWeekInfo = (weekStr: string) => {
+                // Try pattern: YYYY-W## or YYYY-week-##
+                let match = weekStr.match(/(\d{4})[-\s]?[Ww]?(?:eek)?[-\s]?(\d+)/)
+                if (match) {
+                  return { year: parseInt(match[1]), week: parseInt(match[2]) }
+                }
+                
+                // Try pattern: Week ## YYYY
+                match = weekStr.match(/[Ww]eek\s*(\d+)\s*(\d{4})/)
+                if (match) {
+                  return { year: parseInt(match[2]), week: parseInt(match[1]) }
+                }
+                
+                // Default to parsing as ISO date
+                const date = new Date(weekStr)
+                if (!isNaN(date.getTime())) {
+                  const year = date.getFullYear()
+                  const startOfYear = new Date(year, 0, 1)
+                  const weekNumber = Math.ceil(((date.getTime() - startOfYear.getTime()) / 86400000 + 1) / 7)
+                  return { year, week: weekNumber }
+                }
+                
+                return { year: 2025, week: 0 }
+              }
+              
+              const infoA = extractWeekInfo(a.week)
+              const infoB = extractWeekInfo(b.week)
+              
+              // Sort by year first, then by week (descending)
+              if (infoB.year !== infoA.year) {
+                return infoB.year - infoA.year
+              }
+              return infoB.week - infoA.week
             })
+            
+            console.log(`Latest ${category} metric:`, sortedMetrics[0])
             latestMetrics.push(sortedMetrics[0])
           }
         })
@@ -64,10 +103,10 @@ export function StatusPanel() {
   
   const getMetricColor = (trend: string) => {
     switch (trend) {
-      case 'up': return 'green'
-      case 'down': return 'red'
-      case 'unstable': return 'yellow'
-      default: return 'blue'
+      case 'up': return 'text-green-400 border-green-400/30 from-green-500/10 to-green-600/20'
+      case 'down': return 'text-red-400 border-red-400/30 from-red-500/10 to-red-600/20'
+      case 'unstable': return 'text-yellow-400 border-yellow-400/30 from-yellow-500/10 to-yellow-600/20'
+      default: return 'text-blue-400 border-blue-400/30 from-blue-500/10 to-blue-600/20'
     }
   }
   
@@ -100,8 +139,9 @@ export function StatusPanel() {
       </h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className={`bg-gradient-to-br from-${getMetricColor(incomeMetric?.trend || 'blue')}-500/10 to-${getMetricColor(incomeMetric?.trend || 'blue')}-600/20 p-5 rounded-lg border border-${getMetricColor(incomeMetric?.trend || 'blue')}-400/30 backdrop-blur-sm`}>
-          <div className={`text-${getMetricColor(incomeMetric?.trend || 'blue')}-400 font-semibold mb-3 flex items-center gap-2`}>
+        {/* Income Card */}
+        <div className={`bg-gradient-to-br ${incomeMetric ? getMetricColor(incomeMetric.trend) : 'from-blue-500/10 to-blue-600/20 border-blue-400/30'} p-5 rounded-lg border backdrop-blur-sm`}>
+          <div className="text-current font-semibold mb-3 flex items-center gap-2">
             💰 <span>Income</span>
           </div>
           <div className="flex items-baseline gap-2 mb-2">
@@ -112,14 +152,15 @@ export function StatusPanel() {
               {incomeMetric?.unit || ''}
             </div>
           </div>
-          <div className={`flex items-center gap-2 text-${getMetricColor(incomeMetric?.trend || 'blue')}-400 text-sm font-medium`}>
+          <div className="flex items-center gap-2 text-current text-sm font-medium">
             {getTrendIcon(incomeMetric?.trend || 'stable')}
             <span className="capitalize">{incomeMetric?.trend || 'stable'}</span>
           </div>
         </div>
         
-        <div className={`bg-gradient-to-br from-${getMetricColor(focusMetric?.trend || 'blue')}-500/10 to-${getMetricColor(focusMetric?.trend || 'blue')}-600/20 p-5 rounded-lg border border-${getMetricColor(focusMetric?.trend || 'blue')}-400/30 backdrop-blur-sm`}>
-          <div className={`text-${getMetricColor(focusMetric?.trend || 'blue')}-400 font-semibold mb-3 flex items-center gap-2`}>
+        {/* Focus Time Card */}
+        <div className={`bg-gradient-to-br ${focusMetric ? getMetricColor(focusMetric.trend) : 'from-blue-500/10 to-blue-600/20 border-blue-400/30'} p-5 rounded-lg border backdrop-blur-sm`}>
+          <div className="text-current font-semibold mb-3 flex items-center gap-2">
             ⏰ <span>Focus Time</span>
           </div>
           <div className="flex items-baseline gap-2 mb-2">
@@ -130,14 +171,15 @@ export function StatusPanel() {
               {focusMetric?.unit || ''}
             </div>
           </div>
-          <div className={`flex items-center gap-2 text-${getMetricColor(focusMetric?.trend || 'blue')}-400 text-sm font-medium`}>
+          <div className="flex items-center gap-2 text-current text-sm font-medium">
             {getTrendIcon(focusMetric?.trend || 'stable')}
             <span className="capitalize">{focusMetric?.trend || 'stable'}</span>
           </div>
         </div>
         
-        <div className={`bg-gradient-to-br from-${getMetricColor(energyMetric?.trend || 'blue')}-500/10 to-${getMetricColor(energyMetric?.trend || 'blue')}-600/20 p-5 rounded-lg border border-${getMetricColor(energyMetric?.trend || 'blue')}-400/30 backdrop-blur-sm`}>
-          <div className={`text-${getMetricColor(energyMetric?.trend || 'blue')}-400 font-semibold mb-3 flex items-center gap-2`}>
+        {/* Energy Card */}
+        <div className={`bg-gradient-to-br ${energyMetric ? getMetricColor(energyMetric.trend) : 'from-blue-500/10 to-blue-600/20 border-blue-400/30'} p-5 rounded-lg border backdrop-blur-sm`}>
+          <div className="text-current font-semibold mb-3 flex items-center gap-2">
             🌱 <span>Energy</span>
           </div>
           <div className="flex items-baseline gap-2 mb-2">
@@ -148,14 +190,15 @@ export function StatusPanel() {
               {energyMetric?.unit || ''}
             </div>
           </div>
-          <div className={`flex items-center gap-2 text-${getMetricColor(energyMetric?.trend || 'blue')}-400 text-sm font-medium`}>
+          <div className="flex items-center gap-2 text-current text-sm font-medium">
             {getTrendIcon(energyMetric?.trend || 'stable')}
             <span className="capitalize">{energyMetric?.trend || 'stable'}</span>
           </div>
         </div>
         
-        <div className={`bg-gradient-to-br from-${getMetricColor(wellbeingMetric?.trend || 'blue')}-500/10 to-${getMetricColor(wellbeingMetric?.trend || 'blue')}-600/20 p-5 rounded-lg border border-${getMetricColor(wellbeingMetric?.trend || 'blue')}-400/30 backdrop-blur-sm`}>
-          <div className={`text-${getMetricColor(wellbeingMetric?.trend || 'blue')}-400 font-semibold mb-3 flex items-center gap-2`}>
+        {/* Well-being Card */}
+        <div className={`bg-gradient-to-br ${wellbeingMetric ? getMetricColor(wellbeingMetric.trend) : 'from-blue-500/10 to-blue-600/20 border-blue-400/30'} p-5 rounded-lg border backdrop-blur-sm`}>
+          <div className="text-current font-semibold mb-3 flex items-center gap-2">
             🧘 <span>Well-being</span>
           </div>
           <div className="flex items-baseline gap-2 mb-2">
@@ -166,7 +209,7 @@ export function StatusPanel() {
               {wellbeingMetric?.unit || ''}
             </div>
           </div>
-          <div className={`flex items-center gap-2 text-${getMetricColor(wellbeingMetric?.trend || 'blue')}-400 text-sm font-medium`}>
+          <div className="flex items-center gap-2 text-current text-sm font-medium">
             {getTrendIcon(wellbeingMetric?.trend || 'stable')}
             <span className="capitalize">{wellbeingMetric?.trend || 'stable'}</span>
           </div>

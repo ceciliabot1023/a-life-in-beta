@@ -23,8 +23,7 @@ export default function LifeFindingsPage() {
             category: {
               eq: 'LIFE'
             }
-          },
-          sort: 'date'
+          }
         })
         
         const findingsData = response.data.findingsConnection.edges?.map(edge => ({
@@ -36,7 +35,14 @@ export default function LifeFindingsPage() {
           body: edge?.node?.body
         })).filter(f => f.id) || []
         
-        setFindings(findingsData)
+        // Sort by date in descending order (newest first)
+        const sortedFindings = findingsData.sort((a, b) => {
+          const dateA = new Date(a.date).getTime()
+          const dateB = new Date(b.date).getTime()
+          return dateB - dateA
+        })
+        
+        setFindings(sortedFindings)
       } catch (error) {
         console.error('Error fetching findings:', error)
       } finally {
@@ -97,9 +103,7 @@ export default function LifeFindingsPage() {
                   <Link href={`/lab/findings/life/${slug}`}>
                     <GlassPanel className="p-6 hover:bg-white/10 transition-all duration-300 cursor-pointer">
                       <div className="flex items-center space-x-3 mb-6">
-                        // Apply the same sorting logic and UI improvements
-                        // Change the icon from 🌟 to 🌱 to match the updated design
-                        <span className="text-3xl">🌱</span>
+                        <span className="text-3xl">🌟</span>
                         <h2 className="cyberpunk-title-glow text-3xl font-bold text-white">{finding.title}</h2>
                       </div>
                       
