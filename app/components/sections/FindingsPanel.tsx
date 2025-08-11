@@ -15,7 +15,9 @@ export function FindingsPanel() {
       try {
         const response = await fetch('/api/findings')
         const data = await response.json()
-        const findingsData: TinaFinding[] = data.findings || []
+        
+        // Ensure findingsData is always an array
+        const findingsData: TinaFinding[] = Array.isArray(data.findings) ? data.findings : []
         
         // Sort by date, most recent first
         const sortedFindings = findingsData.sort((a: TinaFinding, b: TinaFinding) => 
@@ -25,6 +27,7 @@ export function FindingsPanel() {
         setFindings(sortedFindings)
       } catch (error) {
         console.error('Error fetching findings:', error)
+        setFindings([])
       } finally {
         setLoading(false)
       }
@@ -105,7 +108,6 @@ export function FindingsPanel() {
           </div>
         </Link>
       </div>
-      {/* If TinaMarkdown is used here, apply same fix */}
     </GlassPanel>
   )
 }

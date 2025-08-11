@@ -28,9 +28,10 @@ export function StatusPanel() {
         const response = await fetch('/api/metrics')
         const data: MetricsApiResponse = await response.json()
         
-        console.log('Raw metrics response:', data.metrics)
+        console.log('Raw metrics response:', data)
         
-        const metricsData: MetricData[] = data.metrics || []
+        // Ensure metricsData is always an array
+        const metricsData: MetricData[] = Array.isArray(data.metrics) ? data.metrics : []
         
         console.log('Parsed metrics data:', metricsData)
         
@@ -39,12 +40,14 @@ export function StatusPanel() {
         const categories: string[] = ['income', 'focus-time', 'wellbeing', 'energy']
         
         categories.forEach((category: string) => {
-          const categoryMetrics = metricsData.filter((m: MetricData) => m.category.toLowerCase() === category.toLowerCase())
-          console.log(`Metrics for ${category}:`, categoryMetrics)
-          
-          if (categoryMetrics.length > 0) {
-            // Sort by week - handle various formats
-            const sortedMetrics = categoryMetrics.sort((a: MetricData, b: MetricData) => {
+          // Ensure we're working with an array before filtering
+          if (Array.isArray(metricsData)) {
+            const categoryMetrics = metricsData.filter((m: MetricData) => m.category.toLowerCase() === category.toLowerCase())
+            console.log(`Metrics for ${category}:`, categoryMetrics)
+            
+            if (categoryMetrics.length > 0) {
+              // Sort by week - handle various formats
+              const sortedMetrics = categoryMetrics.sort((a: MetricData, b: MetricData) => {
               // Extract week info for comparison
               const extractWeekInfo = (weekStr: string): { year: number; week: number } => {
                 // Try pattern: YYYY-W## or YYYY-week-##
@@ -81,8 +84,11 @@ export function StatusPanel() {
               return infoB.week - infoA.week
             })
             
-            console.log(`Latest ${category} metric:`, sortedMetrics[0])
-            latestMetrics.push(sortedMetrics[0])
+              console.log(`Latest ${category} metric:`, sortedMetrics[0])
+              latestMetrics.push(sortedMetrics[0])
+            }
+          } else {
+            console.error('metricsData is not an array:', metricsData)
           }
         })
         
@@ -218,4 +224,3 @@ export function StatusPanel() {
     </GlassPanel>
   )
 }
-
