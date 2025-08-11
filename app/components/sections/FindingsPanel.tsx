@@ -15,10 +15,10 @@ export function FindingsPanel() {
       try {
         const response = await fetch('/api/findings')
         const data = await response.json()
-        const findingsData = data.findings || []
+        const findingsData: TinaFinding[] = data.findings || []
         
         // Sort by date, most recent first
-        const sortedFindings = findingsData.sort((a, b) => 
+        const sortedFindings = findingsData.sort((a: TinaFinding, b: TinaFinding) => 
           new Date(b.date).getTime() - new Date(a.date).getTime()
         )
         
