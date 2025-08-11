@@ -3,7 +3,6 @@
 import { GlassPanel } from '@/components/ui/GlassPanel'
 import { useState, useEffect } from 'react'
 import { TrendingUp, TrendingDown, Minus, AlertTriangle } from 'lucide-react'
-import client from '../../../tina/__generated__/client'
 
 interface MetricData {
   category: string
@@ -20,17 +19,13 @@ export function StatusPanel() {
   useEffect(() => {
     async function fetchMetrics() {
       try {
-        const response = await client.queries.metricsConnection()
+        // Use API route instead of direct client query
+        const response = await fetch('/api/metrics')
+        const data = await response.json()
         
-        console.log('Raw metrics response:', response.data.metricsConnection.edges)
+        console.log('Raw metrics response:', data.metrics)
         
-        const metricsData = response.data.metricsConnection.edges?.map(edge => ({
-          category: edge?.node?.category || '',
-          week: edge?.node?.week || '',
-          value: edge?.node?.value || '',
-          unit: edge?.node?.unit || '',
-          trend: edge?.node?.trend || ''
-        })) || []
+        const metricsData = data.metrics || []
         
         console.log('Parsed metrics data:', metricsData)
         
@@ -39,7 +34,7 @@ export function StatusPanel() {
         const categories = ['income', 'focus-time', 'wellbeing', 'energy']
         
         categories.forEach(category => {
-          const categoryMetrics = metricsData.filter(m => m.category === category)
+          const categoryMetrics = metricsData.filter(m => m.category.toLowerCase() === category.toLowerCase())
           console.log(`Metrics for ${category}:`, categoryMetrics)
           
           if (categoryMetrics.length > 0) {

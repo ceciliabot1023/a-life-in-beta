@@ -4,7 +4,6 @@ import { GlassPanel } from '@/components/ui/GlassPanel'
 import Link from 'next/link'
 import { ArrowRight, Zap } from 'lucide-react'
 import { useState, useEffect } from 'react'
-import client from '../../../tina/__generated__/client'
 import type { TinaFinding } from '../../../types/tina'
 
 export function FindingsPanel() {
@@ -14,15 +13,9 @@ export function FindingsPanel() {
   useEffect(() => {
     async function fetchFindings() {
       try {
-        const response = await client.queries.findingsConnection()
-        const findingsData = response.data.findingsConnection.edges?.map(edge => ({
-          id: edge?.node?.id || '',
-          title: edge?.node?.title || '',
-          category: edge?.node?.category || '',
-          week: edge?.node?.week || '',
-          date: edge?.node?.date || '',
-          body: edge?.node?.body
-        })) || []
+        const response = await fetch('/api/findings')
+        const data = await response.json()
+        const findingsData = data.findings || []
         
         // Sort by date, most recent first
         const sortedFindings = findingsData.sort((a, b) => 
