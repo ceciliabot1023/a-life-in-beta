@@ -35,32 +35,90 @@ export default defineConfig({
             name: 'category',
             label: 'Category',
             required: true,
+            ui: {
+              validate: (value) => {
+                if (!value || value.trim() === '') {
+                  return 'Category is required'
+                }
+              }
+            }
           },
           {
             type: 'string',
             name: 'week',
             label: 'Week',
             required: true,
+            ui: {
+              validate: (value) => {
+                if (!value || value.trim() === '') {
+                  return 'Week is required'
+                }
+              }
+            }
           },
           {
             type: 'object',
             name: 'data',
             label: 'Data',
+            required: false, // Make the entire object optional
             fields: [
               {
                 type: 'number',
                 name: 'value',
                 label: 'Value',
+                required: false,
+                ui: {
+                  // Parse empty strings or invalid input as null
+                  parse: (val) => {
+                    if (val === '' || val === null || val === undefined) {
+                      return null
+                    }
+                    const parsed = Number(val)
+                    return isNaN(parsed) ? null : parsed
+                  },
+                  // Format null values as empty string for display
+                  format: (val) => {
+                    if (val === null || val === undefined) {
+                      return ''
+                    }
+                    return String(val)
+                  },
+                  // Optional: Add validation if you want to enforce certain rules
+                  validate: (value) => {
+                    // Allow null/empty values
+                    if (value === null || value === undefined || value === '') {
+                      return
+                    }
+                    // Check if it's a valid number
+                    if (typeof value === 'number' && !isNaN(value)) {
+                      return
+                    }
+                    return 'Please enter a valid number'
+                  },
+                  // Add a helpful description
+                  description: 'Enter a numeric value (leave empty if not applicable)',
+                }
               },
               {
                 type: 'string',
                 name: 'unit',
                 label: 'Unit',
+                required: false,
+                ui: {
+                  description: 'e.g., hours, dollars, percentage',
+                  // Trim whitespace
+                  parse: (val) => val ? val.trim() : '',
+                }
               },
               {
                 type: 'string',
                 name: 'trend',
                 label: 'Trend',
+                required: false,
+                options: ['up', 'down', 'stable', 'n/a'],
+                ui: {
+                  description: 'Select the trend direction',
+                }
               },
             ],
           },
@@ -78,6 +136,16 @@ export default defineConfig({
             label: 'Title',
             isTitle: true,
             required: true,
+            ui: {
+              validate: (value) => {
+                if (!value || value.trim() === '') {
+                  return 'Title is required'
+                }
+                if (value.length < 3) {
+                  return 'Title must be at least 3 characters long'
+                }
+              }
+            }
           },
           {
             type: 'string',
@@ -85,18 +153,52 @@ export default defineConfig({
             label: 'Category',
             options: ['WORK', 'LIFE'],
             required: true,
+            ui: {
+              validate: (value) => {
+                if (!value) {
+                  return 'Please select a category'
+                }
+              }
+            }
           },
           {
             type: 'string',
             name: 'week',
             label: 'Week',
             required: true,
+            ui: {
+              validate: (value) => {
+                if (!value || value.trim() === '') {
+                  return 'Week is required'
+                }
+                // Optional: Add week format validation
+                // Example: if expecting format like "2024-W01"
+                // const weekPattern = /^\d{4}-W\d{2}$/
+                // if (!weekPattern.test(value)) {
+                //   return 'Week format should be YYYY-WXX (e.g., 2024-W01)'
+                // }
+              }
+            }
           },
           {
             type: 'datetime',
             name: 'date',
             label: 'Date',
             required: true,
+            ui: {
+              dateFormat: 'YYYY-MM-DD',
+              validate: (value) => {
+                if (!value) {
+                  return 'Date is required'
+                }
+                // Check if date is not in the future
+                const selectedDate = new Date(value)
+                const today = new Date()
+                if (selectedDate > today) {
+                  return 'Date cannot be in the future'
+                }
+              }
+            }
           },
           {
             type: 'rich-text',
@@ -118,19 +220,44 @@ export default defineConfig({
             label: 'Title',
             isTitle: true,
             required: true,
+            ui: {
+              validate: (value) => {
+                if (!value || value.trim() === '') {
+                  return 'Title is required'
+                }
+                if (value.length < 2) {
+                  return 'Title must be at least 2 characters long'
+                }
+                if (value.length > 100) {
+                  return 'Title must be less than 100 characters'
+                }
+              }
+            }
           },
           {
             type: 'string',
             name: 'status',
             label: 'Status',
             options: ['concept', 'development', 'testing', 'launched'],
+            required: false,
+            ui: {
+              description: 'Current status of the app',
+              defaultValue: 'concept', // Set a default value
+            }
           },
           {
-            type: 'string',     // ← Change from 'rich-text' to 'string'
+            type: 'string',
             name: 'description',
             label: 'Description',
+            required: false,
             ui: {
-              component: 'textarea'  // Allow multi-line text
+              component: 'textarea',
+              description: 'Brief description of the app',
+              validate: (value) => {
+                if (value && value.length > 500) {
+                  return 'Description must be less than 500 characters'
+                }
+              }
             }
           },
           {

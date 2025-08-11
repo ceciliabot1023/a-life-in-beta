@@ -1,8 +1,11 @@
 // tina/config.ts
 import { defineConfig } from "tinacms";
 var config_default = defineConfig({
-  contentApiUrlOverride: true ? "http://localhost:4001/graphql" : void 0,
-  // Let it use TinaCloud in production
+  // Comment out or remove this line to always use TinaCloud
+  // contentApiUrlOverride: 
+  //   process.env.NODE_ENV === "development" 
+  //     ? "http://localhost:4001/graphql" 
+  //     : undefined,
   branch: "main",
   clientId: process.env.TINA_CLIENT_ID || process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
   token: process.env.TINA_TOKEN,
@@ -28,33 +31,90 @@ var config_default = defineConfig({
             type: "string",
             name: "category",
             label: "Category",
-            required: true
+            required: true,
+            ui: {
+              validate: (value) => {
+                if (!value || value.trim() === "") {
+                  return "Category is required";
+                }
+              }
+            }
           },
           {
             type: "string",
             name: "week",
             label: "Week",
-            required: true
+            required: true,
+            ui: {
+              validate: (value) => {
+                if (!value || value.trim() === "") {
+                  return "Week is required";
+                }
+              }
+            }
           },
           {
             type: "object",
             name: "data",
             label: "Data",
+            required: false,
+            // Make the entire object optional
             fields: [
               {
                 type: "number",
                 name: "value",
-                label: "Value"
+                label: "Value",
+                required: false,
+                ui: {
+                  // Parse empty strings or invalid input as null
+                  parse: (val) => {
+                    if (val === "" || val === null || val === void 0) {
+                      return null;
+                    }
+                    const parsed = Number(val);
+                    return isNaN(parsed) ? null : parsed;
+                  },
+                  // Format null values as empty string for display
+                  format: (val) => {
+                    if (val === null || val === void 0) {
+                      return "";
+                    }
+                    return String(val);
+                  },
+                  // Optional: Add validation if you want to enforce certain rules
+                  validate: (value) => {
+                    if (value === null || value === void 0 || value === "") {
+                      return;
+                    }
+                    if (typeof value === "number" && !isNaN(value)) {
+                      return;
+                    }
+                    return "Please enter a valid number";
+                  },
+                  // Add a helpful description
+                  description: "Enter a numeric value (leave empty if not applicable)"
+                }
               },
               {
                 type: "string",
                 name: "unit",
-                label: "Unit"
+                label: "Unit",
+                required: false,
+                ui: {
+                  description: "e.g., hours, dollars, percentage",
+                  // Trim whitespace
+                  parse: (val) => val ? val.trim() : ""
+                }
               },
               {
                 type: "string",
                 name: "trend",
-                label: "Trend"
+                label: "Trend",
+                required: false,
+                options: ["up", "down", "stable", "n/a"],
+                ui: {
+                  description: "Select the trend direction"
+                }
               }
             ]
           }
@@ -71,26 +131,63 @@ var config_default = defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
-            required: true
+            required: true,
+            ui: {
+              validate: (value) => {
+                if (!value || value.trim() === "") {
+                  return "Title is required";
+                }
+                if (value.length < 3) {
+                  return "Title must be at least 3 characters long";
+                }
+              }
+            }
           },
           {
             type: "string",
             name: "category",
             label: "Category",
             options: ["WORK", "LIFE"],
-            required: true
+            required: true,
+            ui: {
+              validate: (value) => {
+                if (!value) {
+                  return "Please select a category";
+                }
+              }
+            }
           },
           {
             type: "string",
             name: "week",
             label: "Week",
-            required: true
+            required: true,
+            ui: {
+              validate: (value) => {
+                if (!value || value.trim() === "") {
+                  return "Week is required";
+                }
+              }
+            }
           },
           {
             type: "datetime",
             name: "date",
             label: "Date",
-            required: true
+            required: true,
+            ui: {
+              dateFormat: "YYYY-MM-DD",
+              validate: (value) => {
+                if (!value) {
+                  return "Date is required";
+                }
+                const selectedDate = new Date(value);
+                const today = /* @__PURE__ */ new Date();
+                if (selectedDate > today) {
+                  return "Date cannot be in the future";
+                }
+              }
+            }
           },
           {
             type: "rich-text",
@@ -111,22 +208,46 @@ var config_default = defineConfig({
             name: "title",
             label: "Title",
             isTitle: true,
-            required: true
+            required: true,
+            ui: {
+              validate: (value) => {
+                if (!value || value.trim() === "") {
+                  return "Title is required";
+                }
+                if (value.length < 2) {
+                  return "Title must be at least 2 characters long";
+                }
+                if (value.length > 100) {
+                  return "Title must be less than 100 characters";
+                }
+              }
+            }
           },
           {
             type: "string",
             name: "status",
             label: "Status",
-            options: ["concept", "development", "testing", "launched"]
+            options: ["concept", "development", "testing", "launched"],
+            required: false,
+            ui: {
+              description: "Current status of the app",
+              defaultValue: "concept"
+              // Set a default value
+            }
           },
           {
             type: "string",
-            // ← Change from 'rich-text' to 'string'
             name: "description",
             label: "Description",
+            required: false,
             ui: {
-              component: "textarea"
-              // Allow multi-line text
+              component: "textarea",
+              description: "Brief description of the app",
+              validate: (value) => {
+                if (value && value.length > 500) {
+                  return "Description must be less than 500 characters";
+                }
+              }
             }
           },
           {
