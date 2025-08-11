@@ -253,19 +253,4 @@ export default defineConfig({
     ],
   },
 })
-
-
-// Lines 72-82 and 110 - These will cause TypeScript compilation errors
-parse: (val) => {
-  if (val === '' || val === null || val === undefined) {
-    return null
-  }
-  const parsed = Number(val)
-  return isNaN(parsed) ? null : parsed
-},
-format: (val) => {
-  if (val === null || val === undefined) {
-    return ''
-  }
-  return String(val)
-},
+// Remove everything after this line
