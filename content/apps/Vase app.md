@@ -2,36 +2,28 @@
 title: Vase app
 status: development
 description: >
-  What if you could find your center, even on the most demanding days?  
+  A Mental Reset Button for Focus
 
+  Think of it as Ctrl+Alt+Delete for your brain. When your mental browser has
+  100 tabs open and everything's frozen, you don't need meditation or therapy —
+  you need a reset button.
 
-  When your world moves fast, a moment of peace is your greatest asset. We’ve
-  created Vase—a beautiful, private space for that moment.  
+  This app is:
 
+  - A focus recovery tool (not a meditation app)
 
-  Vase isn't another meditation app. It's your discreet, 3-minute emotional
-  reset designed for the workplace. Gently pour a stressful feeling into your
-  Vase to immediately quiet the noise and regain your focus. The feeling is
-  safely held, not dismissed, giving you the clarity to excel in the moment.  
+  - An energy management system (not a wellness journey)
 
+  - A performance enabler (not a mental health solution)
 
-  Later, when you have time, explore what's inside. Our premium suite goes
-  beyond simple tracking by connecting your feelings to your body's needs.
-  Discover personalized nutrition, activity, and reflection
-  prompts—science-backed insights that build lasting resilience from the inside
-  out.  
+  - Mental clearing technology (not emotional processing)
 
-
-  <strong>Vase.</strong> <strong>Your feelings are welcome here.</strong>  
+  The Mechanism: Cognitive containment — drop overwhelming thoughts into a
+  container, watch them dissolve, return to baseline. It's like emptying your
+  brain's trash folder.
 
 
   Join the waitlist for your exclusive invitation.
 ---
 
-![Vase App Screen 1](/images/Indie app/screen1.png)
-
-![Vase App Screen 2](/images/Indie app/screen2.png)
-
-![Vase App Screen 3](/images/Indie app/screen3.png)
-
-![Vase App Screen 4](/images/Indie app/screen4.png)
+[ScreenRecording\_09-17-2025 21-01-09\_1.MP4](https://assets.tina.io/9bf24b29-3afb-4a7d-86be-f676ed425a9a/ScreenRecording_09-17-2025%2021-01-09_1.MP4 "ScreenRecording_09-17-2025 21-01-09_1.MP4")
