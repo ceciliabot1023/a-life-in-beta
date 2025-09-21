@@ -26,4 +26,4 @@ description: >
   Join the waitlist for your exclusive invitation.
 ---
 
-[ScreenRecording\_09-17-2025 21-01-09\_1.MP4](https://assets.tina.io/9bf24b29-3afb-4a7d-86be-f676ed425a9a/ScreenRecording_09-17-2025%2021-01-09_1.MP4 "ScreenRecording_09-17-2025 21-01-09_1.MP4")
+![](</images/Indie app/Screen3.jpg>)![](/images/Indie%20app/Screen2.jpg)![](/images/Indie%20app/Screen1.jpg)
